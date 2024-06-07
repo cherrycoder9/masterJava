@@ -1,7 +1,5 @@
 package day01;
 
-import java.util.Arrays;
-
 public class Step3 { // class start
     public static void main(String[] args) {
         // 1. 정수 자료형
@@ -19,7 +17,7 @@ public class Step3 { // class start
         System.out.println("i1 = " + i1);
         // int i2 = 3000000000; // 저장가능 범위가 아님
         long l1 = 3000000000000000000L; // 자바는 모든 값의 기본을 int로 처리하기 때문에 L붙여야함, 21억 이상인 경우
-        
+
         // 2. 문자 자료형, 문자 1개만 저장가능, ' '작은따옴표, 65536개 문자 표현가능
         // 문자만 됨
         char c1 = 'A';
@@ -44,12 +42,13 @@ public class Step3 { // class start
         // 허용범위 벗어남 boolean bool3 = 't';
         System.out.println("bool1 = " + bool1);
         System.out.println("bool2 = " + bool2);
-        
+
         // 4. 실수 자료형
         // double: 
         double d1 = 0.123456789123456789; // 실수 기본 자료형임. 정수형은 int가 기본자료형
         System.out.println("d1 = " + d1);
         float d2 = 0.123456789123456789f;
         System.out.println("d2 = " + d2);
+        System.out.println(d1 + d2);
     }
 }
