@@ -152,7 +152,7 @@ public class Practice {
         // boolean isSame = (Objects.equals(strId, "admin")) && (Objects.equals(strPass, "1234"));
         // 위의 방법도 됨
         boolean isSame = strId.equals("admin") && strPass.equals("1234");
-        String result = isSame ? "로그인 ㅋ성공" : "로그인 실패";
+        String result = isSame ? "로그인 성공" : "로그인 실패";
         System.out.println(result);
         // 자바에서 String 비교시 비교연산자 == 사용은 불가능함
         // 객체 비교 메서드를 사용해야 함: 객체.equals();
