@@ -2,7 +2,7 @@ package day05;
 
 public class Step21 {
     public static void main(String[] args) {
-        /*int total = 0;
+        int total = 0;
         for (int num = 1; num <= 100; num++) {
             if (num % 2 == 0) {
                 continue;
@@ -29,7 +29,7 @@ public class Step21 {
             }
             sum3 += num3;
         }
-        System.out.println(sum3);*/
+        System.out.println(sum3);
 
 
         // 문제1

@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Step2 { // class start
     public static void main(String[] args) { // main start
-        /*
         // 이름을 하나 입력받고, 내용 입력받고 나이를 입력받는다
         Scanner scan = new Scanner(System.in);
 
@@ -25,12 +24,11 @@ public class Step2 { // class start
         System.out.println("============ 방문록 ============");
         System.out.printf("%-5s\t%-15s\t%-5s\n", "작성자", "방문록", "나이");
         System.out.printf("%-5s\t%-15s\t%-5d", name, content, age);
-        */
 
 
         // 기본급과 수당을 정수로 입력받아 실수령액을 계산해 출력
         // 실수령액: 기본급 + 수당 - 세금(기본급의 10%)
-        Scanner scan = new Scanner(System.in);
+//        Scanner scan = new Scanner(System.in);
 
         // 기본급 입력(정수)
         System.out.println("기본급을 입력하세요:");
