@@ -36,6 +36,7 @@ public class Step3 {
         }
         System.out.println(starSum);*/
 
+        // 4.
         // 만일 5를 입력했으면 5줄 모양의 별 출력
         // *
         // **
@@ -49,29 +50,51 @@ public class Step3 {
             System.out.printf("%s\n", starSum);
         }*/
 
-        //     *
-        //    **
-        //   ***
-        //  ****
-        // *****
-        int star = scanner.nextInt();
+        // 5.
+        //          line    blank   star
+        //     *    1       1234    1
+        //    **    2       123     12
+        //   ***    3       12      123
+        //  ****    4       1       1234
+        // *****    5               12345
+        //
+        /*int star = scanner.nextInt();
         String starSum = "";
         for (int i = 1; i <= star; i++) {
             starSum += "*";
             System.out.printf("%" + star + "s\n", starSum);
-        }
+        }*/
+
 
         // *****
         // ****
         // ***
         // **
         // *
+        /*int star = scanner.nextInt();
+        String starSum = "";
+        for (int i = star; i >= 1; i--) {
+            for (int j = 1; j <= i; j++) {
+                starSum += "*";
+            }
+            System.out.printf("%s\n", starSum);
+            starSum = "";
+        }*/
 
         // *****
         //  ****
         //   ***
         //    **
         //     *
+        int star = scanner.nextInt();
+        String starSum = "";
+        for (int i = star; i >= 1; i--) {
+            for (int j = 1; j <= i; j++) {
+                starSum += "*";
+            }
+            System.out.printf("%" + star + "s\n", starSum);
+            starSum = "";
+        }
 
         // 입력받은 줄수만큼
         //    *
