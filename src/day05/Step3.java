@@ -66,6 +66,7 @@ public class Step3 {
         }*/
 
 
+        // 6
         // *****
         // ****
         // ***
@@ -81,12 +82,13 @@ public class Step3 {
             starSum = "";
         }*/
 
+        // 7
         // *****
         //  ****
         //   ***
         //    **
         //     *
-        int star = scanner.nextInt();
+        /*int star = scanner.nextInt();
         String starSum = "";
         for (int i = star; i >= 1; i--) {
             for (int j = 1; j <= i; j++) {
@@ -94,14 +96,32 @@ public class Step3 {
             }
             System.out.printf("%" + star + "s\n", starSum);
             starSum = "";
-        }
+        }*/
 
+        // 9
+        // *******
+        //  *****
+        //   ***
+        //    *
+
+        // 8
         // 입력받은 줄수만큼
         //    *
         //   ***
         //  *****
         // *******
+        /*int star = scanner.nextInt();
+        String starSum = "";
+        for (int i = 1; i <= star; i++) {
+            starSum += "*";
+            System.out.printf("%" + star + "s", starSum);
+            for (int j = 1; j < i; j++) {
+                System.out.printf("*");
+            }
+            System.out.println();
+        }*/
 
+        // 9
         //    *
         //   ***
         //  *****
@@ -109,6 +129,9 @@ public class Step3 {
         //  *****
         //   ***
         //    *
+        int star = scanner.nextInt();
+        String starSum = "";
+
 
         // *   *
         //  * *
