@@ -1,88 +1,98 @@
 package day05;
 
+import java.util.Scanner;
+
 public class Step3 {
     public static void main(String[] args) {
-        /*int total = 0;
-        for (int num = 1; num <= 100; num++) {
-            if (num % 2 == 0) {
-                continue;
-            }
-            total += num;
+        // 입력: 입력객체
+        Scanner scanner = new Scanner(System.in);
+
+        // 입력받은 수 만큼 별 출력
+        // 1. 키보드로부터 정수형으로 입력받아 정수 변수에 저장
+        /*System.out.print("별을 몇개 출력할지 입력하세요: ");
+        int star1 = scanner.nextInt();
+        System.out.println("star1 = " + star1);
+        for (int i = 1; i <= star1; i++) {
+            System.out.printf("*");
         }
-        System.out.println(total);
+        System.out.println();*/
 
-        // 예제: 1부터 1씩 증가하면서 누적 합계가 100이상이면 중지
-        int sum2 = 0;
-        for (int num2 = 0; num2 < 100; num2++) {
-            if (sum2 >= 100) {
-                break;
+        // 입력받은 수만큼 별 출력하고 3의 배수마다 줄바꿈 처리
+        /*System.out.print("별을 몇개 출력할지 입력하세요: ");
+        int star2 = scanner.nextInt();
+        System.out.println();
+        for (int i = 1; i <= star2; i++) {
+            System.out.printf("*");
+            if (i % 3 == 0) {
+                System.out.println();
             }
-            sum2 += num2;
+        }*/
+
+        // 입력받은 수 만큼 별을 하나의 변수에 하나씩 추가후 해당 변수 출력
+        /*int star3 = scanner.nextInt();
+        String starSum = "";
+        for (int i = 1; i <= star3; i++) {
+            starSum += "*";
         }
-        System.out.println(sum2);
+        System.out.println(starSum);*/
 
-        // 예제: 1부터 1씩 증가하면서 누적 합계가 100이면 중지
-        int sum3 = 0;
-        for (int num3 = 0; num3 < 100; num3++) {
-            if (sum2 >= 100) {
-                break;
-            }
-            sum3 += num3;
-        }
-        System.out.println(sum3);*/
+        // 만일 5를 입력했으면 5줄 모양의 별 출력
+        // *
+        // **
+        // ***
+        // ****
+        // *****
+        /*int star = scanner.nextInt();
+        String starSum = "";
+        for (int i = 1; i <= star; i++) {
+            starSum += "*";
+            System.out.printf("%s\n", starSum);
+        }*/
 
-
-        // 문제1
-        int num1 = 10;
-        int num2 = 2;
-        char operator = '+';
-
-        switch (operator) {
-            case '+':
-                System.out.println(num1 + num2);
-                break;
-            case '-':
-                System.out.println(num1 - num2);
-                break;
-            case '*':
-                System.out.println(num1 * num2);
-                break;
-            case '/':
-                System.out.println(num1 / num2);
-                break;
-            default:
-                System.out.println("연산수행 불가능");
-        }
-
-        // 문제2: 짝수단만 구구단 출력
-        for (int dan = 2; dan <= 9; dan++) {
-            if (dan % 2 == 1) {
-                continue;
-            }
-            System.out.printf("===== %d단 =====\n", dan);
-            for (int times = 1; times <= 9; times++) {
-                System.out.printf("%d * %d = %d\n", dan, times, dan * times);
-            }
+        //     *
+        //    **
+        //   ***
+        //  ****
+        // *****
+        int star = scanner.nextInt();
+        String starSum = "";
+        for (int i = 1; i <= star; i++) {
+            starSum += "*";
+            System.out.printf("%" + star + "s\n", starSum);
         }
 
-        // 문제3: 구구단을 단보다 곱하는 수가 작거나 같은 경우까지만 출력
-        for (int dan = 2; dan <= 9; dan++) {
-            System.out.printf("===== %d단 =====\n", dan);
-            for (int times = 1; times <= 9; times++) {
-                if (dan < times) {
-                    break;
-                }
-                System.out.printf("%d * %d = %d\n", dan, times, dan * times);
-            }
-        }
+        // *****
+        // ****
+        // ***
+        // **
+        // *
 
-        // 문제4: 반복문 별 출력
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < i * 2 + 1; j++) {
-                System.out.printf("*");
-            }
-            System.out.println();
-        }
+        // *****
+        //  ****
+        //   ***
+        //    **
+        //     *
+
+        // 입력받은 줄수만큼
+        //    *
+        //   ***
+        //  *****
+        // *******
+
+        //    *
+        //   ***
+        //  *****
+        // *******
+        //  *****
+        //   ***
+        //    *
+
+        // *   *
+        //  * *
+        //   *
+        //  * *
+        // *   *
+
 
     }
 }
