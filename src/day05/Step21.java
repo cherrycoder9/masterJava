@@ -9,6 +9,7 @@ public class Step21 {
             }
             total += num;
         }
+        //sadfs
         System.out.println(total);
 
         // 예제: 1부터 1씩 증가하면서 누적 합계가 100이상이면 중지
