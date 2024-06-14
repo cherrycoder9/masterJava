@@ -3,55 +3,50 @@ package day07.step3;
 import java.util.Scanner;
 
 public class Step3 {
-    public static void main(String[] args) {
+    public static void main(String[] args) { // main s
+
+        // 1. 입력 객체 : 입력기능( .next() )을 사용할려고
+        // .next() 관련된 기능을 scanner 객체가 가지고 있으니까
 
         Scanner scanner = new Scanner(System.in);
-        Account myAccount = new Account("32829-012454", 10000);
 
-        while (true) {
+        // 1. 생성자를 이용한 객체의 초기값 대입
+        Account myAccount = new Account(0, "123-123");
+
+        while (true) { // w s : 무한반복
+            // 출력
             System.out.println("==============================");
             System.out.print("1.예금 2.출금 3.잔고 4.종료 : ");
+            // 입력
             int ch = scanner.nextInt();
+            System.out.println("ch = " + ch);
+            // 3. 입력값에 따른 서로 다른 로직 처리 ( 조건문 )
+            if (ch == 1) {
+                System.out.println("예금처리");
+                System.out.print("예금할 금액 입력 : ");
+                int money = scanner.nextInt();
+                myAccount.setBalance(myAccount.getBalance() + money);
 
-            switch (ch) {
-                case 1:
-                    deposit(scanner, myAccount);
-                    break;
-                case 2:
-                    withdraw(scanner, myAccount);
-                    break;
-                case 3:
-                    checkBalance(myAccount);
-                    break;
-                case 4:
-                    System.out.println("종료");
-                    return;
-                default:
-                    System.out.println("알수없는 번호 입니다.");
-            }
-        }
-    }
+            } // 만약에 내가 입력한 값이 1 이면 예금처리
+            else if (ch == 2) {
+                System.out.println("출금처리");
+                System.out.print("출금할 금액 입력 : ");
+                int money = scanner.nextInt();
+                myAccount.setBalance(myAccount.getBalance() - money);
 
-    private static void deposit(Scanner scanner, Account account) {
-        System.out.println("예금처리");
-        System.out.print("예금할 금액 입력 : ");
-        long amount = scanner.nextLong();
-        account.deposit(amount);
-    }
+            }  // 만약에 내가 입력한 값이 2 이면 출금처리
+            else if (ch == 3) {
+                System.out.println("잔고확인처리");
+                System.out.println(myAccount.getBalance());
 
-    private static void withdraw(Scanner scanner, Account account) {
-        System.out.println("출금처리");
-        System.out.print("출금할 금액 입력 : ");
-        long amount = scanner.nextLong();
-        if (account.withdraw(amount)) {
-            System.out.println("출금 완료");
-        } else {
-            System.out.println("잔액이 부족합니다.");
-        }
-    }
-
-    private static void checkBalance(Account account) {
-        System.out.println("잔고확인처리");
-        System.out.println("현재 잔고: " + account.getBalance());
-    }
+            } // 만약에 내가 입력한 값이 3 이면 잔고확인처리
+            else if (ch == 4) {
+                System.out.println("종료");
+                break;
+            } // 만약에 내가 입력한 값이 4 이면 종료
+            else {
+                System.out.println("알수없는 번호 입니다.");
+            } // 그외
+        } // w end
+    } // main e
 }
