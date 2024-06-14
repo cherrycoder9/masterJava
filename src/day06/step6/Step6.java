@@ -1,3 +1,4 @@
+/*
 package day06.step6;
 
 // 요구사항
@@ -42,3 +43,4 @@ public class Step6 {
         }
     }
 }
+*/

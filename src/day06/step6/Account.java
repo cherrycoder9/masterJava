@@ -1,3 +1,4 @@
+/*
 package day06.step6;
 
 // 요구사항
@@ -20,6 +21,9 @@ public class Account {
     long balance;
     String number;
 
+    public Account(String 임세원, int i) {
+    }
+
     public void 예금(long 입금액) {
         balance += 입금액;
     }
@@ -32,3 +36,4 @@ public class Account {
         System.out.printf("잔고는 %d원 입니다.\n", balance);
     }
 }
+*/
