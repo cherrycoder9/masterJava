@@ -10,6 +10,9 @@ public class Step4 {
 	    [ 객체 생성 ]
         임의의 데이터를 입력하여 2개의 객체를 생성하고 출력하는 코드를 작성하시오.
         */
-        
+        Product book1 = new Product("죽을 때까지 코딩하며 사는 법", 16000);
+        Product book2 = new Product("하루 5분 UX", 30000);
+        book1.printProductInfo();
+        book2.printProductInfo();
     }
 }

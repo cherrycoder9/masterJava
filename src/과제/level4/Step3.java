@@ -10,6 +10,11 @@ public class Step3 {
 	    [ 객체 생성 ]
         임의의 데이터를 입력하여 2개의 객체를 생성하고 출력하는 코드를 작성하시오.
         */
-
+        Member 철수 = new Member("parkcs314", "dk0014w", "이철수");
+        Member 민지 = new Member("min9911ss", "WjdalsWl00", "정민지");
+        철수.printMemberInfo();
+        민지.printMemberInfo();
+        철수.changePassword();
+        민지.changePassword();
     }
 }
