@@ -56,7 +56,7 @@ public class 플레이어 {
         this.소속팀 = 소속팀;
     }
 
-    public int get고유식별번호() {
+    private int get고유식별번호() {
         return 고유식별번호;
     }
 
@@ -64,7 +64,7 @@ public class 플레이어 {
         this.고유식별번호 = 고유식별번호;
     }
 
-    public String get이름() {
+    private String get이름() {
         return 이름;
     }
 
@@ -72,7 +72,7 @@ public class 플레이어 {
         this.이름 = 이름;
     }
 
-    public int get나이() {
+    private int get나이() {
         return 나이;
     }
 
@@ -80,7 +80,7 @@ public class 플레이어 {
         this.나이 = 나이;
     }
 
-    public String get선호포지션() {
+    private String get선호포지션() {
         return 선호포지션;
     }
 
@@ -88,7 +88,7 @@ public class 플레이어 {
         this.선호포지션 = 선호포지션;
     }
 
-    public String get소속팀() {
+    private String get소속팀() {
         return 소속팀;
     }
 
