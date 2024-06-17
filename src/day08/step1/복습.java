@@ -45,5 +45,21 @@ public class 복습 {
         b1.번호 = 1;
         b1.제목 = "안녕하세요";
 
+        // ====== 메소드 ㅇ
+
+        제품 p1 = new 제품();
+
+        p1.set제품명("굿즈");
+        p1.set제품번호(3);
+
+        // 2. 객체를 통해 메소드 호출
+        p1.구매함수();
+
+        // public, private 현재 클래스 기준의 다른 클래스로부터 공개 여부
+        // 관례적으로 멤버변수는 private 사용
+        // p1.제품번호 = "사이다"; // 오류 private이라서 (int이기도 함)
+
+        // 멤버변수가 private일때 getter, setter를 활용하자
+        System.out.println(p1.get제품명());
     }
 }
