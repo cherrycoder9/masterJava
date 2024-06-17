@@ -17,6 +17,7 @@ package day08.step2;
     6,"서장훈",21,"공격수",서울
 * */
 public class 플레이어 {
+
     private int 고유식별번호;
     private String 이름;
     private int 나이;
@@ -56,7 +57,7 @@ public class 플레이어 {
         this.소속팀 = 소속팀;
     }
 
-    private int get고유식별번호() {
+    public int get고유식별번호() {
         return 고유식별번호;
     }
 
