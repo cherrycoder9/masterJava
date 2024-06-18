@@ -36,17 +36,14 @@ public class AddPlayer {
                 System.out.print("삭제할 회원번호: ");
                 int removeNum = scan.nextInt();
                 for (int i = 0; i < 축구선수들.length; i++) {
-//                    if (축구선수들[i].get고유식별번호() == removeNum) {
-//                        축구선수들[removeNum] = 축구선수들[removeNum + 1];
-//                        축구선수들[removeNum + 1] = new 플레이어();
-//                        continue;
-//                    }
                     if (축구선수들[i] == null || 축구선수들[i].get고유식별번호() == -1) {
                         continue;
                     }
                     if (축구선수들[i].get고유식별번호() == removeNum) {
+                        축구선수들[i] = 축구선수들[i + 1];
+                        축구선수들[i + 1] = new 플레이어();
                         System.out.println("회원이 삭제되었습니다.");
-                        축구선수들[i].set고유식별번호(-1);
+//                        축구선수들[i].set고유식별번호(-1);
                     }
                 }
             } else {
@@ -54,13 +51,5 @@ public class AddPlayer {
                 break;
             }
         }
-        // 1번 입력시 선수의 속성값(고유식별번호, 이름, 나이, 선호포지션, 소속팀)을 입력받아 객체 생성후 배열에 저장
-        // - 고유식별번호는 자동할당 또는 입력
-
-        // 2번 입력시 현재 배열내 모든 객체를 출력 (단, null이면 출력하지 마세요)
-        // - 만약에 2명의 축구선수가 배열내 존재 했을때 아래와 같이 출력
-        // 고유식별번호, 이름, 나이, 선호포지션, 소속팀
-
-
     }
 }
