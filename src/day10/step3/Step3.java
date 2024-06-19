@@ -35,14 +35,25 @@ public class Step3 {
                 // 학번을 입력받는다
                 System.out.print("학번을 입력하세요: ");
                 int studentID = scanner.nextInt();
+                boolean found = false;
                 // 동일한 학번을 학생리스트에서 찾는다
                 for (int i = 0; i < studentList.size(); i++) {
                     if (studentList.get(i).studentID == studentID) {
+                        // 찾았으면 과목명과 점수를 입력받는다.
                         System.out.print("과목명을 입력하세요: ");
-                        String subject = scanner.next();
+                        String subjectName = scanner.next();
+                        System.out.print("점수를 입력하세요: ");
+                        int scorePoint = scanner.nextInt();
+                        // 해당하는 학생의 addSubject 메서드를 실행한다
+                        studentList.get(i).addSubject(subjectName, scorePoint);
+                        found = true;
+                        break;
                     }
                 }
-                System.out.println("입력하신 학번이 없습니다.");
+                // 찾지 못했으면 안내메시지를 띄운다.
+                if (!found) {
+                    System.out.println("입력하신 학번이 없습니다.");
+                }
             }
             if (ch == 3) {
                 // 점수확인
