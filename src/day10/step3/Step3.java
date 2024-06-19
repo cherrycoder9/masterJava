@@ -25,9 +25,9 @@ public class Step3 {
                 System.out.print("이름을 입력하세요: ");
                 String studentName = scanner.next();
                 // 학번과 이름으로 학생 객체를 생성한다.
-                Student student1 = new Student(studentID, studentName);
+                Student newStudent = new Student(studentID, studentName);
                 // 학생 객체를 학생 리스트에 추가한다.
-                studentList.add(student1);
+                studentList.add(newStudent);
                 // studentList.get(0).showStudentInfo();
             }
             if (ch == 2) {
@@ -67,17 +67,19 @@ public class Step3 {
          *       2. 해당 학번의 학생의 모든 점수리스트를 출력
          * */
 
-//        Student studentLee = new Student(1001, "Lee");
-//        studentLee.addSubject("국어", 100);
-//        studentLee.addSubject("수학", 50);
-//
-//        Student studentKim = new Student(1002, "Kim");
-//        studentKim.addSubject("국어", 70);
-//        studentKim.addSubject("수학", 85);
-//        studentKim.addSubject("영어", 100);
-//
-//        studentLee.showStudentInfo();
-//        System.out.println("===================================");
-//        studentKim.showStudentInfo();
+        /*
+        Student studentLee = new Student(1001, "Lee");
+        studentLee.addSubject("국어", 100);
+        studentLee.addSubject("수학", 50);
+
+        Student studentKim = new Student(1002, "Kim");
+        studentKim.addSubject("국어", 70);
+        studentKim.addSubject("수학", 85);
+        studentKim.addSubject("영어", 100);
+
+        studentLee.showStudentInfo();
+        System.out.println("===================================");
+        studentKim.showStudentInfo();
+        */
     }
 }
