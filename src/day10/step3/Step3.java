@@ -1,11 +1,15 @@
 package day10.step3;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Step3 {
     public static void main(String[] args) {
         // 229페이지 코드 주석처리ㅏ
         Scanner scanner = new Scanner(System.in);
+
+        // 학생목록 리스트 생성
+        ArrayList<Student> studentList = new ArrayList<>();
 
         while (true) {
             System.out.println("1.학생등록 2.점수등록 3.점수확인 4.학생삭제");
@@ -14,11 +18,31 @@ public class Step3 {
             int ch = scanner.nextInt();
             if (ch == 1) {
                 // 학생등록
-                
+                // 학번을 입력받는다
+                System.out.print("학번을 입력하세요: ");
+                int studentID = scanner.nextInt();
+                // 이름을 입력받는다
+                System.out.print("이름을 입력하세요: ");
+                String studentName = scanner.next();
+                // 학번과 이름으로 학생 객체를 생성한다.
+                Student student1 = new Student(studentID, studentName);
+                // 학생 객체를 학생 리스트에 추가한다.
+                studentList.add(student1);
+                // studentList.get(0).showStudentInfo();
             }
             if (ch == 2) {
                 // 점수등록
-
+                // 학번을 입력받는다
+                System.out.print("학번을 입력하세요: ");
+                int studentID = scanner.nextInt();
+                // 동일한 학번을 학생리스트에서 찾는다
+                for (int i = 0; i < studentList.size(); i++) {
+                    if (studentList.get(i).studentID == studentID) {
+                        System.out.print("과목명을 입력하세요: ");
+                        String subject = scanner.next();
+                    }
+                }
+                System.out.println("입력하신 학번이 없습니다.");
             }
             if (ch == 3) {
                 // 점수확인
