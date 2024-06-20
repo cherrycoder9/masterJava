@@ -143,7 +143,6 @@ public class Step1 {
                     주문상세.add(새로운주문상세);
                 }
                 카트리스트.clear();
-
             } else if (ch == 8) {
                 System.out.println(카트리스트);
                 // Order List
@@ -155,14 +154,9 @@ public class Step1 {
                     int 제품코드 = 주문상세.get(i).get제품코드();
                     int 주문수량 = 주문상세.get(i).get수량();
                     // 제품명을 찾는다
-
                     for (int j = 0; j < 제품.size(); j++) {
-//                        System.out.println(제품.get(j).get제품명());
-
                         if (제품코드 == 제품.get(j).get제품코드()) {
-
                             제품명 = 제품.get(j).get제품명();
-                            
                             break;
                         }
                     }
