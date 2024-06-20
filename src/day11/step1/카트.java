@@ -24,4 +24,29 @@ public class 카트 {
     }
 
     // 메서드
+
+
+    public int get제품코드() {
+        return 제품코드;
+    }
+
+    public void set제품코드(int 제품코드) {
+        this.제품코드 = 제품코드;
+    }
+
+    public int get주문수량() {
+        return 주문수량;
+    }
+
+    public void set주문수량(int 주문수량) {
+        this.주문수량 = 주문수량;
+    }
+
+    @Override
+    public String toString() {
+        return "카트{" +
+                "제품코드=" + 제품코드 +
+                ", 주문수량=" + 주문수량 +
+                '}';
+    }
 }
