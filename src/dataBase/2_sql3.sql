@@ -64,6 +64,7 @@ select * from t3;
 
 # 4. auto_increment = 레코드 삽입시 해당 필드내 자동번호 부여
 use day03;
+drop table t4;
 create table t4(
 	tno int not null unique auto_increment, 
     tname varchar(10) default "아무개"
@@ -83,6 +84,7 @@ select * from t4;
 # primary key : 기본키, 레코드 내 식별 가능한 고유값 가진 키, 참조당하는 키 
 # 낫널과 유니크가 자동으로 포함되어 있음 
 # primary key(선정할필드명)
+drop table t5;
 create table t5(
 	tno_pk int,
     tname varchar(30),
@@ -91,9 +93,46 @@ create table t5(
 select * from t5;
 # foreign key : 외래키, 다른 테이블내 기본키를 참조하는 키, 참조하는 키 
 
+drop table t6;
 create table t6(
 	title text, tno_fk int,
     foreign key(tno_fk) references t5(tno_pk)
 );
 
 select * from t6;
+
+
+#  예시 
+
+# 1. 회원
+drop table r;
+drop table b;
+drop table m;
+create table m(
+	mno_pk int,
+    mname varchar(10),
+    mphone char(13),
+    primary key(mno_pk) -- 해당 필드를 pk로 설정 
+);
+
+# 2. 게시물
+create table b(
+	bno_pk int,
+    btitle varchar(100),
+    bcontent longtext,
+    bdate datetime default now(),
+    mno_fk int,
+    primary key(bno_pk),
+    foreign key(mno_fk) references m(mno_pk)
+);
+
+# 3. 게시물 댓글
+create table r(
+	rno_pk int,
+    rcontent text,
+    rpwd varchar(20),
+    bno_fk int,
+    primary key(rno_pk),
+    foreign key(bno_fk) references b(bno_pk),
+    foreign key(mno_fk) references m(mno_pk)
+);
