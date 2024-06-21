@@ -62,6 +62,10 @@ public class Step1 {
             System.out.println("8.Order List");
             System.out.print("Menu choose : ");
             int ch = scan.nextInt();
+            // day12 과제: Category Add, Category List 구현 코드에서 사용되는
+            // 지역변수, static변수, 멤버변수, 객체들이 저장되는 구역 찾기
+            // ArrayList 포함
+            // 시간이 된다면 Product Add, Product List
             if (ch == 1) {
                 // Category Add
                 // 카테고리명을 입력받아 카테고리 목록에 등록
