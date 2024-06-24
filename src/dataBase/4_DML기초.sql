@@ -55,3 +55,17 @@ from table1;
 select *
 from table1
 where mname = '유재석';
+
+# [3] UPDATE : 레코드 (행, 튜플, 가로단위)의 필드 값 수정 
+# 1.  특정 필드의 전체 값 수정: update 테이블명 set 수정할필드명 = 새로운값;
+update table1 set mno = 10; # 테이블의 mno필드를 10으로 수정
+
+# 2. 특정 필드의 조건에 따른 값 수정 
+update table1 set mno = 3 where mname = '유재석';
+update table1 set mname = '유재석B' where mno = 3;
+
+select * from table1;
+
+# update, delete는 workbench에서 기본적으로 차단함 -> safe mode
+# safe mode 끄기
+SET SQL_SAFE_UPDATES = 0;  # safe mode = 0: 해제, 1: 사용
