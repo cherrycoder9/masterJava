@@ -38,8 +38,10 @@ public class Step5 {
                     // 수정 기능 (미구현)
                 } else if (ch == 4) {
                     System.out.print(">>[삭제D] 이름: ");
-                    
-                    String sql = "delete from table1 where name = '유재석'";
+                    String name = scan.next();
+                    String sql = "delete from table1 where name = '" + name + "'";
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.executeUpdate();
                 } else {
                     System.out.println("없는 기능 번호입니다."); // 잘못된 메뉴 선택 시 메시지 출력
                 }
