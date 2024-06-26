@@ -18,8 +18,8 @@ public class Step5 {
         }
 
         while (true) { // 무한 루프로 프로그램 실행
-            System.out.print("1.등록 2.출력 3.수정 4.삭제: ");
             try {
+                System.out.print("1.등록 2.출력 3.수정 4.삭제: ");
                 int ch = scan.nextInt(); // 사용자로부터 메뉴 선택 입력 받기
                 if (ch == 1) {
                     // 1. 등록 기능
