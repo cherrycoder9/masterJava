@@ -3,30 +3,42 @@ package day15.step3_MVC;
 import java.util.ArrayList;
 
 public class Controller {
-    // 외부 클래스로부터 내부 메소드를 사용할 수 있도록 만든 스태틱 변수
+    // 정적 필드로 Controller 인스턴스를 생성
     static Controller controller = new Controller();
 
-    // 2. 등록 제어 함수, 매개변수: 저장할 값 String, 리턴: 등록성공여부 boolean
+    // 회원 등록을 처리하는 메서드
+    // 매개변수: 등록할 회원 이름
+    // 반환값: 등록 성공 여부
     public boolean signupC(String name) {
         System.out.println("Controller.signupC");
-        return false;
+        boolean result = Dao.dao.signupC(name);
+        return result;
     }
 
-    // 3. 출력 제어 함수, 매개변수: 없음, 리턴: 회원목록 ArrayList
+    // 모든 회원 목록을 조회하는 메서드
+    // 매개변수: 없음
+    // 반환값: 회원 이름 목록
     public ArrayList<String> printC() {
         System.out.println("Controller.printC");
-        return null;
+        ArrayList<String> result = Dao.dao.printC();
+        return result;
     }
 
-    // 4. 수정 제어 함수, 매개변수: 기존이름 String, 새로운이름 String, 리턴: 수정 성공여부 boolean
+    // 회원 정보를 수정하는 메서드
+    // 매개변수: 기존 이름, 새로운 이름
+    // 반환값: 수정 성공 여부
     public boolean updateC(String oldName, String newName) {
         System.out.println("Controller.updateC");
-        return false;
+        boolean result = Dao.dao.updateC(oldName, newName);
+        return result;
     }
 
-    // 5. 삭제 제어 함수, 삭제할 이름 String, 리턴: 삭제성공여부 boolean
+    // 회원을 삭제하는 메서드
+    // 매개변수: 삭제할 회원 이름
+    // 반환값: 삭제 성공 여부
     public boolean deleteC(String name) {
         System.out.println("Controller.deleteC");
-        return false;
+        boolean result = Dao.dao.deleteC(name);
+        return result;
     }
 }
