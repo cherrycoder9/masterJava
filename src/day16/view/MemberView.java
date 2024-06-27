@@ -59,16 +59,64 @@ public class MemberView {
 
     // 로그인 처리 메서드
     public void login() {
+        // 컨트롤러 매개변수와 리턴값 -> Dao 매개변수와 리턴값 -> 뷰 로직
+        // 컨트롤러 로직 -> DAO 로직 -> 테스트
+        // 아이디와 비밀번호 입력받아 일치한 정보가 있으면 로그인성공
+        // 없으면 로그인 실패 출력
         // 미구현 상태
+        System.out.print("아이디: ");
+        String mid = scan.next();
+        System.out.print("비밀번호: ");
+        String mpwd = scan.next();
+        MemberDto memberDto = new MemberDto();
+        memberDto.setMname(mid);
+        memberDto.setMphone(mpwd);
+
+        boolean result = MemberController.mControl.login(memberDto);
+        if (result) {
+            System.out.println("로그인 성공");
+        } else {
+            System.out.println("로그인 실패");
+        }
     }
 
     // 아이디 찾기 처리 메서드
     public void findId() {
+        // 이름과 연락처를 입력받아 일치한 정보가 있으면 찾은 아이디 출력
+        // 없으면 없습니다. 출력
         // 미구현 상태
+        System.out.print("이름: ");
+        String mname = scan.next();
+        System.out.print("연락처: ");
+        String mphone = scan.next();
+        MemberDto memberDto = new MemberDto();
+        memberDto.setMname(mname);
+        memberDto.setMphone(mphone);
+        String result = MemberController.mControl.findId(memberDto);
+        if (result != null) {
+            System.out.println("아이디: " + result);
+        } else {
+            System.out.println("아이디를 찾지 못했습니다.");
+        }
     }
 
     // 비밀번호 찾기 처리 메서드
     public void findPwd() {
+        // 아이디와 연락처를 입력받아 일치한 정보가 있으면 찾은 비밀번호 출력
+        // 없으면 없습니다. 출력
         // 미구현 상태
+        System.out.print("아이디: ");
+        String mid = scan.next();
+        System.out.print("연락처: ");
+        String mphone = scan.next();
+        MemberDto memberDto = new MemberDto();
+        memberDto.setMid(mid);
+        memberDto.setMphone(mphone);
+        String result = MemberController.mControl.findPwd(memberDto);
+        if (result != null) {
+            System.out.println("비밀번호: " + result);
+        } else {
+            System.out.println("비밀번호를 찾지 못했습니다.");
+        }
     }
 }

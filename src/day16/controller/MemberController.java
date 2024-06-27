@@ -11,21 +11,23 @@ public class MemberController {
 
     // 회원가입 처리 메서드
     public boolean signup(MemberDto memberDto) {
-        return MemberDao.mDao.signup(memberDto);
+        // 아이디 중복검사
+        boolean result = MemberDao.mDao.signup(memberDto);
+        return result;
     }
 
     // 로그인 처리 메서드
-    public void login() {
-        // 미구현 상태
+    public boolean login(MemberDto memberDto) {
+        return MemberDao.mDao.login(memberDto);
     }
 
     // 아이디 찾기 처리 메서드
-    public void findId() {
-        // 미구현 상태
+    public String findId(MemberDto memberDto) {
+        return MemberDao.mDao.findId(memberDto);
     }
 
     // 비밀번호 찾기 처리 메서드
-    public void findPwd() {
-        // 미구현 상태
+    public String findPwd(MemberDto memberDto) {
+        return MemberDao.mDao.findPwd(memberDto);
     }
 }

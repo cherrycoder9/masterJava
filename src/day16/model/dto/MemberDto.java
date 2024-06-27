@@ -32,6 +32,10 @@ public class MemberDto {
         this.mphone = mphone;
     }
 
+    public MemberDto(String mid) {
+        this.mid = mid;
+    }
+
     // Getter 및 Setter 메서드
     public String getMid() {
         return mid;

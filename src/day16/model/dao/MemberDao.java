@@ -50,18 +50,84 @@ public class MemberDao {
     }
 
     // 로그인 처리 메서드
-    public void login() {
-        // 미구현 상태
+    public boolean login(MemberDto memberDto) {
+        try {
+            // 1. SQL 쿼리 준비
+            String sql = "SELECT * FROM member WHERE mid = ? AND mpwd = ?;";
+
+            // 2. PreparedStatement 객체 생성
+            ps = conn.prepareStatement(sql);
+
+            // 3. SQL 쿼리의 파라미터 설정
+            ps.setString(1, memberDto.getMid());
+            ps.setString(2, memberDto.getMpwd());
+
+            // 4. SQL 쿼리 실행 및 결과 저장
+            rs = ps.executeQuery();
+
+            // 5. 결과 확인 및 반환
+            return rs.next(); // 결과가 존재하면 true, 없으면 false 반환
+        } catch (Exception e) {
+            System.out.println("로그인 처리 실패: " + e);
+            return false;
+        }
     }
 
 
     // 아이디 찾기 처리 메서드
-    public void findId() {
-        // 미구현 상태
+    public String findId(MemberDto memberDto) {
+        try {
+            // 1. SQL 쿼리 준비
+            String sql = "SELECT * FROM member WHERE mname = ? and mphone = ?;";
+
+            // 2. PreparedStatement 객체 생성
+            ps = conn.prepareStatement(sql);
+
+            // 3. SQL 쿼리의 파라미터 설정
+            ps.setString(1, memberDto.getMname());
+            ps.setString(2, memberDto.getMphone());
+
+            // 4. SQL 쿼리 실행 및 결과 저장
+            rs = ps.executeQuery();
+
+            // 5. 결과 확인 및 반환
+            if (rs.next()) {
+                return rs.getString("mid");
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println("로그인 처리 실패: " + e);
+            return null;
+        }
     }
 
     // 비밀번호 찾기 처리 메서드
-    public void findPwd() {
-        // 미구현 상태
+    public String findPwd(MemberDto memberDto) {
+        System.out.println(memberDto);
+        try {
+            // 1. SQL 쿼리 준비
+            String sql = "SELECT * FROM member WHERE mid = ? and mphone = ?;";
+
+            // 2. PreparedStatement 객체 생성
+            ps = conn.prepareStatement(sql);
+
+            // 3. SQL 쿼리의 파라미터 설정
+            ps.setString(1, memberDto.getMid());
+            ps.setString(2, memberDto.getMphone());
+
+            // 4. SQL 쿼리 실행 및 결과 저장
+            rs = ps.executeQuery();
+
+            // 5. 결과 확인 및 반환
+            if (rs.next()) {
+                return rs.getString("mpwd");
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println("로그인 처리 실패: " + e);
+            return null;
+        }
     }
 }
