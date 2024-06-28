@@ -52,18 +52,22 @@ public class MemberView {
         // 사용자로부터 아이디 입력 받기
         System.out.print("아이디: ");
         String mid = scan.next();
+
         // 사용자로부터 비밀번호 입력 받기
         System.out.print("비밀번호: ");
         String mpwd = scan.next();
+
         // 사용자로부터 이름 입력 받기
         System.out.print("이름: ");
         String mname = scan.next();
+
         // 사용자로부터 연락처 입력 받기
         System.out.print("연락처: ");
         String mphone = scan.next();
 
         // 입력받은 정보를 MemberDto 객체로 생성
         MemberDto memberDto = new MemberDto(mid, mpwd, mname, mphone);
+
         // MemberController를 통해 회원가입 처리
         boolean result = MemberController.mControl.signup(memberDto);
 

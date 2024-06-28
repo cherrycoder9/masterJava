@@ -115,9 +115,14 @@ public class MemberDao {
             rs = ps.executeQuery();
 
             // 5. 결과 확인 및 반환
+            // rs.next(): 현재 커서를 다음 행으로 이동시킴
+            // rs.next(): 다음 행이 존재하면 true를 반환하고, 더 이상 행이 없으면 false를 반환
+            // ResultSet의 다음 행으로 이동하여 데이터가 있는지 확인
             if (rs.next()) {
+                // 다음 행이 존재하면 해당 행의 "mid" 컬럼 값을 반환
                 return rs.getString("mid");
             } else {
+                // 다음 행이 존재하지 않으면 null을 반환
                 return null;
             }
         } catch (Exception e) {
@@ -145,6 +150,7 @@ public class MemberDao {
             // 5. 결과 확인 및 반환
             // rs.next(): 현재 커서를 다음 행으로 이동시킴
             // rs.next(): 다음 행이 존재하면 true를 반환하고, 더 이상 행이 없으면 false를 반환
+            // ResultSet의 다음 행으로 이동하여 데이터가 있는지 확인
             if (rs.next()) {
                 // 다음 행이 존재하면 해당 행의 "mpwd" 컬럼 값을 반환
                 return rs.getString("mpwd");
@@ -168,17 +174,22 @@ public class MemberDao {
         try {
             // SQL 쿼리 작성: 회원 이름과 연락처를 업데이트하는 쿼리
             String sql = "update member set mname = ?, mphone = ? where mno = ?;";
+
             // PreparedStatement 객체 생성
             ps = conn.prepareStatement(sql);
+
             // SQL 쿼리의 첫 번째 '?'에 회원 이름 설정
             ps.setString(1, memberDto.getMname());
+
             // SQL 쿼리의 두 번째 '?'에 회원 연락처 설정
             ps.setString(2, memberDto.getMphone());
+
             // SQL 쿼리의 세 번째 '?'에 회원 번호 설정
             ps.setInt(3, memberDto.getMno());
 
             // SQL 쿼리 실행 후 업데이트된 행의 수를 반환
             int count = ps.executeUpdate();
+
             // 업데이트된 행의 수가 1이면, 즉 성공적으로 업데이트되었으면 true 반환
             if (count == 1) {
                 return true;
@@ -196,14 +207,19 @@ public class MemberDao {
         try {
             // SQL 쿼리 작성: 회원 번호와 비밀번호를 조건으로 회원을 삭제하는 쿼리
             String sql = "delete from member where mno = ? and mpwd = ?";
+
             // PreparedStatement 객체 생성
             ps = conn.prepareStatement(sql);
+
             // SQL 쿼리의 첫 번째 '?'에 로그인된 회원 번호 설정
             ps.setInt(1, loginMno);
+
             // SQL 쿼리의 두 번째 '?'에 확인용 비밀번호 설정
             ps.setString(2, confirmPwd);
+
             // SQL 쿼리 실행 후 삭제된 행의 수를 반환
             int count = ps.executeUpdate();
+
             // 삭제된 행의 수가 1이면, 즉 성공적으로 삭제되었으면 true 반환
             if (count == 1) {
                 return true;

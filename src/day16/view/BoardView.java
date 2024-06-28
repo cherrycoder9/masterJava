@@ -53,8 +53,10 @@ public class BoardView {
     public void logout() {
         // 회원 컨트롤러에 로그아웃 메소드 호출
         MemberController.mControl.logout();
+
         // 로그아웃 성공 메시지 출력
         System.out.println(">> 로그아웃 성공 (초기메뉴로)");
+
     } // logout 함수 종료
 
     // 2. 회원수정 함수
