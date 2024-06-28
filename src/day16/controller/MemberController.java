@@ -28,8 +28,9 @@ public class MemberController {
 
     // 2. 회원수정 함수
     // 로그인된 회원이름과 회원연락처를 수정 구현
-    public boolean mUpdate(String newName, String newPhone) {
-        return MemberDao.mDao.mUpdate(newName, newPhone, loginMno);
+    public boolean mUpdate(MemberDto memberDto) {
+        memberDto.setMno((loginMno));
+        return MemberDao.mDao.mUpdate(memberDto);
     }
 
     // 로그인 처리 메서드

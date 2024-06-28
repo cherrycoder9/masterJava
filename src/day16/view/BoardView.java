@@ -1,6 +1,7 @@
 package day16.view;
 
 import day16.controller.MemberController;
+import day16.model.dto.MemberDto;
 
 import java.util.Scanner;
 
@@ -46,11 +47,14 @@ public class BoardView {
     public boolean mUpdate() {
         System.out.println("새로운 이름을 입력해주세요.");
         System.out.print("새이름: ");
-        String newName = scanner.next();
+        String newMname = scanner.next();
         System.out.println("새로운 연락처를 입력해주세요.");
         System.out.print("새 연락처: ");
-        String newPhone = scanner.next();
-        boolean result = MemberController.mControl.mUpdate(newName, newPhone);
+        String newMphone = scanner.next();
+        MemberDto memberDto = new MemberDto();
+        memberDto.setMname(newMname);
+        memberDto.setMphone(newMphone);
+        boolean result = MemberController.mControl.mUpdate(memberDto);
         if (result) {
             System.out.println("변경완료");
             return true;

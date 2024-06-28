@@ -142,15 +142,17 @@ public class MemberDao {
 
     // 2. 회원수정 함수
     // 로그인된 회원이름과 회원연락처를 수정 구현
-    public boolean mUpdate(String newName, String newPhone, int loginMno) {
+    public boolean mUpdate(MemberDto memberDto) {
         try {
-            String sql = "update member set mname = ?, mphone = ? where mno = ?";
+            String sql = "update member set mname = ?, mphone = ? where mno = ?;";
             ps = conn.prepareStatement(sql);
-            ps.setString(1, newName);
-            ps.setString(2, newPhone);
-            ps.setInt(3, loginMno);
-            ps.executeUpdate();
-            return true;
+            ps.setString(1, memberDto.getMname());
+            ps.setString(2, memberDto.getMphone());
+            ps.setInt(3, memberDto.getMno());
+            int count = ps.executeUpdate();
+            if (count == 1) {
+                return true;
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
