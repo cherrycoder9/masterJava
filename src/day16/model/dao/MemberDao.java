@@ -39,7 +39,7 @@ public class MemberDao {
             // 예외 발생 시 예외 메시지 출력
             System.out.println("데이터베이스 연결 실패: " + e);
         }
-    }
+    } // MemberDao 생성자 끝
 
     // 회원가입 처리 메서드
     public boolean signup(MemberDto memberDto) {
@@ -66,7 +66,7 @@ public class MemberDao {
             System.out.println("회원가입 처리 실패: " + e);
         }
         return false;
-    }
+    } // signup 함수 종료
 
     // 로그인 처리 메서드 : 로그인 성공한 회원번호 반환
     public int login(MemberDto memberDto) {
@@ -95,7 +95,7 @@ public class MemberDao {
 
         }
         return 0; // 로그인 실패
-    }
+    } // login 함수 종료
 
 
     // 아이디 찾기 처리 메서드
@@ -124,7 +124,7 @@ public class MemberDao {
             System.out.println("로그인 처리 실패: " + e);
             return null;
         }
-    }
+    } // findId 메서드 종료
 
     // 비밀번호 찾기 처리 메서드
     public String findPwd(MemberDto memberDto) {
@@ -155,11 +155,11 @@ public class MemberDao {
             System.out.println("로그인 처리 실패: " + e);
             return null;
         }
-    }
+    } // findPwd 메서드 종료
 
     // 1. 로그아웃 함수
     public void logout() {
-    }
+    } // logout 메서드 종료
 
     // 2. 회원수정 함수
     // 로그인된 회원이름과 회원연락처를 수정 구현
@@ -188,7 +188,7 @@ public class MemberDao {
         }
         // 업데이트 실패 시 false 반환
         return false;
-    }
+    } // mUpdate 함수 종료
 
     // 3. 회원탈퇴 함수
     public boolean mDelete(String confirmPwd, int loginMno) {
@@ -213,6 +213,6 @@ public class MemberDao {
         }
         // 삭제 실패 시 false 반환
         return false;
-    }
+    } // mDelete 함수 종료
 
 } // MemberDao 클래스 종료
