@@ -29,14 +29,17 @@ public class MemberController {
     // 2. 회원수정 함수
     // 로그인된 회원이름과 회원연락처를 수정 구현
     public boolean mUpdate(MemberDto memberDto) {
+        // 로그인된 회원 번호를 DTO에 설정
         memberDto.setMno((loginMno));
+        // MemberDao를 통해 회원정보 수정 처리
         return MemberDao.mDao.mUpdate(memberDto);
     }
 
     // 로그인 처리 메서드
     public boolean login(MemberDto memberDto) {
+        // MemberDao를 통해 로그인 처리하고, 로그인된 회원 번호를 반환받음
         loginMno = MemberDao.mDao.login(memberDto);
-        System.out.println(loginMno);
+        // 로그인된 회원 번호가 0이 아니면 로그인 성공, 0이면 로그인 실패
         return loginMno == 0 ? false : true;
     }
 

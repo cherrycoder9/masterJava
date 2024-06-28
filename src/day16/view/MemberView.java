@@ -1,5 +1,7 @@
 package day16.view;
 
+// MemberController와 MemberDto 클래스를 사용하기 위해 import
+
 import day16.controller.MemberController;
 import day16.model.dto.MemberDto;
 
@@ -17,9 +19,12 @@ public class MemberView {
     // 0. 초기 화면 표시 및 사용자 입력 처리 메서드
     public void index() {
         while (true) {
+            // 초기 화면 메뉴 출력
             System.out.print("1.회원가입 2.로그인 3.아이디찾기 4.비밀번호찾기: ");
             try {
+                // 사용자 입력을 정수형으로 받음
                 int ch = scan.nextInt();
+                // 입력된 값에 따라 해당 메서드를 호출
                 if (ch == 1) {
                     signup();
                 } else if (ch == 2) {
@@ -29,29 +34,38 @@ public class MemberView {
                 } else if (ch == 4) {
                     findPwd();
                 } else {
+                    // 잘못된 번호 입력 시 메시지 출력
                     System.out.println("없는 번호입니다.");
                 }
             } catch (InputMismatchException e) {
+                // 잘못된 입력 시 예외 처리
                 System.out.println("잘못된 입력이 있습니다.");
-                scan = new Scanner(System.in);
+                scan = new Scanner(System.in); // 스캐너를 다시 초기화
             }
         }
     }
 
     // 1. 회원가입 프로세스 처리 메서드
     public void signup() {
+        // 사용자로부터 아이디 입력 받기
         System.out.print("아이디: ");
         String mid = scan.next();
+        // 사용자로부터 비밀번호 입력 받기
         System.out.print("비밀번호: ");
         String mpwd = scan.next();
+        // 사용자로부터 이름 입력 받기
         System.out.print("이름: ");
         String mname = scan.next();
+        // 사용자로부터 연락처 입력 받기
         System.out.print("연락처: ");
         String mphone = scan.next();
 
+        // 입력받은 정보를 MemberDto 객체로 생성
         MemberDto memberDto = new MemberDto(mid, mpwd, mname, mphone);
-
+        // MemberController를 통해 회원가입 처리
         boolean result = MemberController.mControl.signup(memberDto);
+
+        // 회원가입 결과 출력
         if (result) {
             System.out.println("회원가입 성공");
         }
@@ -59,20 +73,23 @@ public class MemberView {
 
     // 2. 로그인 처리 메서드
     public void login() {
-        // 컨트롤러 매개변수와 리턴값 -> Dao 매개변수와 리턴값 -> 뷰 로직
-        // 컨트롤러 로직 -> DAO 로직 -> 테스트
-        // 아이디와 비밀번호 입력받아 일치한 정보가 있으면 로그인성공
-        // 없으면 로그인 실패 출력
-        // 미구현 상태
+        // 사용자로부터 아이디 입력 받기
         System.out.print("아이디: ");
         String mid = scan.next();
+
+        // 사용자로부터 비밀번호 입력 받기
         System.out.print("비밀번호: ");
         String mpwd = scan.next();
+
+        // 입력받은 아이디와 비밀번호를 MemberDto 객체에 설정
         MemberDto memberDto = new MemberDto();
         memberDto.setMid(mid);
         memberDto.setMpwd(mpwd);
 
+        // MemberController를 통해 로그인 처리
         boolean result = MemberController.mControl.login(memberDto);
+
+        // 로그인 결과 출력
         if (result) {
             System.out.println("로그인 성공");
             // 로그인 성공시 로그인된 메뉴로 이동
@@ -84,17 +101,23 @@ public class MemberView {
 
     // 3. 아이디 찾기 처리 메서드
     public void findId() {
-        // 이름과 연락처를 입력받아 일치한 정보가 있으면 찾은 아이디 출력
-        // 없으면 없습니다. 출력
-        // 미구현 상태
+        // 사용자로부터 이름 입력 받기
         System.out.print("이름: ");
         String mname = scan.next();
+
+        // 사용자로부터 연락처 입력 받기
         System.out.print("연락처: ");
         String mphone = scan.next();
+
+        // 입력받은 이름과 연락처를 MemberDto 객체에 설정
         MemberDto memberDto = new MemberDto();
         memberDto.setMname(mname);
         memberDto.setMphone(mphone);
+
+        // MemberController를 통해 아이디 찾기 처리
         String result = MemberController.mControl.findId(memberDto);
+
+        // 아이디 찾기 결과 출력
         if (result != null) {
             System.out.println("아이디: " + result);
         } else {
@@ -102,19 +125,25 @@ public class MemberView {
         }
     }
 
-    // 비밀번호 찾기 처리 메서드
+    // 4. 비밀번호 찾기 처리 메서드
     public void findPwd() {
-        // 아이디와 연락처를 입력받아 일치한 정보가 있으면 찾은 비밀번호 출력
-        // 없으면 없습니다. 출력
-        // 미구현 상태
+        // 사용자로부터 아이디 입력 받기
         System.out.print("아이디: ");
         String mid = scan.next();
+
+        // 사용자로부터 연락처 입력 받기
         System.out.print("연락처: ");
         String mphone = scan.next();
+
+        // 입력받은 아이디와 연락처를 MemberDto 객체에 설정
         MemberDto memberDto = new MemberDto();
         memberDto.setMid(mid);
         memberDto.setMphone(mphone);
+
+        // MemberController를 통해 비밀번호 찾기 처리
         String result = MemberController.mControl.findPwd(memberDto);
+
+        // 비밀번호 찾기 결과 출력
         if (result != null) {
             System.out.println("비밀번호: " + result);
         } else {
