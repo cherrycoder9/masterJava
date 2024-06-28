@@ -1,6 +1,8 @@
 package day16.view;
 
 // MemberController와 MemberDto 클래스를 사용하기 위해 import
+// InputMismatchException: 잘못된 유형의 입력이 들어왔을 때 발생하는 예외를 처리하기 위해 사용되는 클래스
+// Scanner: 사용자 입력을 받기 위해 사용되는 클래스
 
 import day16.controller.MemberController;
 import day16.model.dto.MemberDto;
@@ -41,9 +43,9 @@ public class MemberView {
                 // 잘못된 입력 시 예외 처리
                 System.out.println("잘못된 입력이 있습니다.");
                 scan = new Scanner(System.in); // 스캐너를 다시 초기화
-            }
-        }
-    }
+            } // while 종료
+        } // while 종료
+    } // index 함수 종료
 
     // 1. 회원가입 프로세스 처리 메서드
     public void signup() {
@@ -69,7 +71,7 @@ public class MemberView {
         if (result) {
             System.out.println("회원가입 성공");
         }
-    }
+    } // signup 함수 종료
 
     // 2. 로그인 처리 메서드
     public void login() {
@@ -97,7 +99,7 @@ public class MemberView {
         } else {
             System.out.println("로그인 실패");
         }
-    }
+    } // login 함수 종료
 
     // 3. 아이디 찾기 처리 메서드
     public void findId() {
@@ -123,7 +125,7 @@ public class MemberView {
         } else {
             System.out.println("아이디를 찾지 못했습니다.");
         }
-    }
+    } // findId 함수 종료
 
     // 4. 비밀번호 찾기 처리 메서드
     public void findPwd() {
@@ -149,5 +151,5 @@ public class MemberView {
         } else {
             System.out.println("비밀번호를 찾지 못했습니다.");
         }
-    }
-}
+    } // findPwd 함수 종료
+} // index 함수 종료

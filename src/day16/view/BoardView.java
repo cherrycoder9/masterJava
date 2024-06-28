@@ -1,6 +1,7 @@
 package day16.view;
 
 // MemberController와 MemberDto 클래스를 사용하기 위해 import
+// Scanner: 사용자 입력을 받기 위해 사용되는 클래스
 
 import day16.controller.MemberController;
 import day16.model.dto.MemberDto;

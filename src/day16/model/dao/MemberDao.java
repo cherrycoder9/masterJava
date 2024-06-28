@@ -1,5 +1,11 @@
 package day16.model.dao; // day16 패키지의 model.dao 서브 패키지에 속함
 
+// MemberDto 클래스를 사용하기 위해 import
+// Connection: 데이터베이스 연결을 위한 클래스
+// DriverManager: JDBC 드라이버를 로드하고 연결을 설정하기 위한 클래스
+// PreparedStatement: SQL 쿼리를 실행하기 위한 클래스
+// ResultSet: SQL 쿼리의 결과를 저장하고 처리하기 위한 클래스
+
 import day16.model.dto.MemberDto;
 
 import java.sql.Connection;
@@ -79,7 +85,7 @@ public class MemberDao {
             // 4. SQL 쿼리 실행 및 결과 저장
             rs = ps.executeQuery();
             if (rs.next()) {
-                // 5. 결과 확인 및 반환
+                // 결과 확인 및 회원 번호 반환
                 return rs.getInt("mno"); // 다음 레코드가 1개라도 회원번호 반환
             }
 
@@ -138,6 +144,8 @@ public class MemberDao {
             rs = ps.executeQuery();
 
             // 5. 결과 확인 및 반환
+            // rs.next(): 현재 커서를 다음 행으로 이동시킴
+            // 다음 행이 존재하면 true를 반환하고, 더 이상 행이 없으면 false를 반환
             if (rs.next()) {
                 return rs.getString("mpwd");
             } else {
