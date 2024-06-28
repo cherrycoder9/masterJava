@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="DB-242.15523.28">
-    <data-source name="fancy_db@localhost" uuid="433b5288-ab56-4dc1-9bb3-466ab687c4ae">
+    <data-source name="kioskorder@localhost" uuid="a38be6cc-eca7-49b7-bfaa-42a823a86b95">
       <database-info product="MySQL" version="8.4.0" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-j-8.2.0 (Revision: 06a1f724497fd81c6a659131fda822c9e5085b6c)" dbms="MYSQL" exact-version="8.4.0" exact-driver-version="8.2">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
@@ -12,7 +12,10 @@
       <user-name>root</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema" qname="@" />
+          <node kind="schema">
+            <name qname="@" />
+            <name qname="day04" />
+          </node>
         </introspection-scope>
       </schema-mapping>
     </data-source>
