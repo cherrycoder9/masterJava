@@ -145,10 +145,12 @@ public class MemberDao {
 
             // 5. 결과 확인 및 반환
             // rs.next(): 현재 커서를 다음 행으로 이동시킴
-            // 다음 행이 존재하면 true를 반환하고, 더 이상 행이 없으면 false를 반환
+            // rs.next(): 다음 행이 존재하면 true를 반환하고, 더 이상 행이 없으면 false를 반환
             if (rs.next()) {
+                // 다음 행이 존재하면 해당 행의 "mpwd" 컬럼 값을 반환
                 return rs.getString("mpwd");
             } else {
+                // 다음 행이 존재하지 않으면 null을 반환
                 return null;
             }
         } catch (Exception e) {
