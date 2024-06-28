@@ -57,7 +57,7 @@ public class MemberView {
         }
     }
 
-    // 로그인 처리 메서드
+    // 2. 로그인 처리 메서드
     public void login() {
         // 컨트롤러 매개변수와 리턴값 -> Dao 매개변수와 리턴값 -> 뷰 로직
         // 컨트롤러 로직 -> DAO 로직 -> 테스트
@@ -69,18 +69,20 @@ public class MemberView {
         System.out.print("비밀번호: ");
         String mpwd = scan.next();
         MemberDto memberDto = new MemberDto();
-        memberDto.setMname(mid);
-        memberDto.setMphone(mpwd);
+        memberDto.setMid(mid);
+        memberDto.setMpwd(mpwd);
 
         boolean result = MemberController.mControl.login(memberDto);
         if (result) {
             System.out.println("로그인 성공");
+            // 로그인 성공시 로그인된 메뉴로 이동
+            BoardView.bView.index2();
         } else {
             System.out.println("로그인 실패");
         }
     }
 
-    // 아이디 찾기 처리 메서드
+    // 3. 아이디 찾기 처리 메서드
     public void findId() {
         // 이름과 연락처를 입력받아 일치한 정보가 있으면 찾은 아이디 출력
         // 없으면 없습니다. 출력

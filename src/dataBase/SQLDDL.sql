@@ -32,7 +32,11 @@ create table board(
     bno int auto_increment,
     primary key(bno),
     foreign key(mno) references member(mno)
+    # 회원이 탈퇴하면 게시물 어떻게 살건지.. 제약조건 설정하기
+    # 회원의 pk값이 삭제/수정되면 제약조건 설정 
+    on delete cascade on update cascade
 );
+
 
 INSERT INTO board (btitle, bcontent, mno) VALUES ('제목입니다 1', '내용이빈다 1', 1);
 INSERT INTO board (btitle, bcontent, mno) VALUES ('제목입니다 2', '내용이빈다 2', 5);
@@ -51,8 +55,12 @@ create table reply(
     bno int,
     rno int auto_increment,
     primary key(rno),
-    foreign key(mno) references member(mno),
+    
+    # 회원이 탈퇴하면 댓글을 어떻게 할건지
+    foreign key(mno) references member(mno)
+    on delete cascade on update cascade,
     foreign key(bno) references board(bno)
+    on delete cascade on update cascade
 );
 
 INSERT INTO reply (rcontent, mno, bno) VALUES ('댓글내용', 1, 2); # 1번 회원이 2번 게시물에 댓글 씀
@@ -86,3 +94,14 @@ SELECT * FROM member WHERE mid = 'que1' AND mphone = '010-0000-0000';
 # 로그인READ (아이디와 비밀번호가 동일한 회원 검색)
 SELECT * FROM member WHERE mid = 'hello1' AND mpwd = '1234';
 # JDBC 매개변수 대입: SELECT * FROM member WHERE mid = ? AND mpwd = ?;
+
+# 탈퇴
+# 1. 회원번호가 '1'인 회원 삭제 
+# delete from member where mno = 1;
+# 2. 회원번호가 '1' 이면서 비밀번호가 '2' 인 회원 삭제
+# delete from member where mno = 1 and mpwd = 2;
+# JDBC SQL: delete from member where mno = ? and mpwd = ?;
+
+SELECT * FROM member;
+SELECT * FROM board;
+SELECT * FROM reply;

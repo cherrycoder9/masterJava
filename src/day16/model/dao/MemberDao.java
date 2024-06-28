@@ -49,8 +49,9 @@ public class MemberDao {
         }
     }
 
-    // 로그인 처리 메서드
-    public boolean login(MemberDto memberDto) {
+    // 로그인 처리 메서드 : 로그인 성공한 회원번호 반환
+    public int login(MemberDto memberDto) {
+        System.out.println("memberDto = " + memberDto);
         try {
             // 1. SQL 쿼리 준비
             String sql = "SELECT * FROM member WHERE mid = ? AND mpwd = ?;";
@@ -64,13 +65,17 @@ public class MemberDao {
 
             // 4. SQL 쿼리 실행 및 결과 저장
             rs = ps.executeQuery();
+            if (rs.next()) {
+                // 5. 결과 확인 및 반환
+                return rs.getInt("mno"); // 다음 레코드가 1개라도 회원번호 반환
+            }
 
-            // 5. 결과 확인 및 반환
-            return rs.next(); // 결과가 존재하면 true, 없으면 false 반환
+
         } catch (Exception e) {
             System.out.println("로그인 처리 실패: " + e);
-            return false;
+
         }
+        return 0; // 로그인 실패
     }
 
 
@@ -130,4 +135,43 @@ public class MemberDao {
             return null;
         }
     }
-}
+
+    // 1. 로그아웃 함수
+    public void logout() {
+    }
+
+    // 2. 회원수정 함수
+    // 로그인된 회원이름과 회원연락처를 수정 구현
+    public boolean mUpdate(String newName, String newPhone, int loginMno) {
+        try {
+            String sql = "update member set mname = ?, mphone = ? where mno = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, newName);
+            ps.setString(2, newPhone);
+            ps.setInt(3, loginMno);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    // 3. 회원탈퇴 함수
+    public boolean mDelete(String confirmPwd, int loginMno) {
+        try {
+            String sql = "delete from member where mno = ? and mpwd = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, loginMno);
+            ps.setString(2, confirmPwd);
+            int count = ps.executeUpdate();
+            if (count == 1) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+} // MemberDao 클래스 종료
