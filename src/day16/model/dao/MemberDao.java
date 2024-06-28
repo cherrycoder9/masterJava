@@ -128,7 +128,6 @@ public class MemberDao {
 
     // 비밀번호 찾기 처리 메서드
     public String findPwd(MemberDto memberDto) {
-        System.out.println(memberDto);
         try {
             // 1. SQL 쿼리 준비
             String sql = "SELECT * FROM member WHERE mid = ? and mphone = ?;";
