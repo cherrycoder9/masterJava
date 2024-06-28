@@ -150,6 +150,6 @@ public class MemberView {
             System.out.println("비밀번호: " + result);
         } else {
             System.out.println("비밀번호를 찾지 못했습니다.");
-        }
+        } // if 종료
     } // findPwd 함수 종료
 } // index 함수 종료

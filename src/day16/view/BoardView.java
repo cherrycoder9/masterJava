@@ -8,7 +8,6 @@ import day16.model.dto.MemberDto;
 
 import java.util.Scanner;
 
-
 public class BoardView {
     // 정적 BoardView 인스턴스 생성
     public static BoardView bView = new BoardView();
@@ -56,7 +55,7 @@ public class BoardView {
         MemberController.mControl.logout();
         // 로그아웃 성공 메시지 출력
         System.out.println(">> 로그아웃 성공 (초기메뉴로)");
-    }
+    } // logout 함수 종료
 
     // 2. 회원수정 함수
     // 로그인된 회원의 이름과 연락처를 수정하는 기능 구현
@@ -87,7 +86,7 @@ public class BoardView {
             System.out.println("변경실패");
             return false; // 변경 실패
         }
-    }
+    } // mUpdate 함수 종료
 
     // 3. 회원탈퇴 함수
     public boolean mDelete() {
@@ -105,9 +104,9 @@ public class BoardView {
         if (result) {
             System.out.println("탈퇴 성공");
             return true; // 탈퇴 성공 시 true 반환
-        }
+        } // if 종료
         return false; // 탈퇴 실패 시 false 반환
-    }
+    } // mDelete 함수 종료
 
     // 4. 게시판(게시물전체출력) 함수
     public void bprint() {
