@@ -1,4 +1,4 @@
-package day16.model.dao;
+package day16.model.dao; // day16 패키지의 model.dao 서브 패키지에 속함
 
 import day16.model.dto.MemberDto;
 
@@ -19,13 +19,18 @@ public class MemberDao {
     // 쿼리 결과 저장 객체
     ResultSet rs;
 
-    // 데이터베이스 연결 생성자
+    // MemberDao 생성자
     MemberDao() {
         try {
+            // MySQL JDBC 드라이버를 로드
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/day06",
-                    "root", "1234");
+            // 데이터베이스 연결을 설정
+            conn = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/day06", // JDBC URL (데이터베이스 주소)
+                    "root", // 데이터베이스 사용자 이름
+                    "1234"); // 데이터베이스 비밀번호
         } catch (Exception e) {
+            // 예외 발생 시 예외 메시지 출력
             System.out.println("데이터베이스 연결 실패: " + e);
         }
     }
@@ -33,20 +38,28 @@ public class MemberDao {
     // 회원가입 처리 메서드
     public boolean signup(MemberDto memberDto) {
         try {
+            // SQL 쿼리 작성: 회원 정보를 member 테이블에 삽입하는 쿼리
             String sql = "INSERT INTO member (mid, mpwd, mname, mphone) VALUES (?, ?, ?, ?)";
+            // PreparedStatement 객체 생성
             ps = conn.prepareStatement(sql);
-
+            // SQL 쿼리의 첫 번째 '?'에 회원 ID 설정
             ps.setString(1, memberDto.getMid());
+            // SQL 쿼리의 두 번째 '?'에 회원 비밀번호 설정
             ps.setString(2, memberDto.getMpwd());
+            // SQL 쿼리의 세 번째 '?'에 회원 이름 설정
             ps.setString(3, memberDto.getMname());
+            // SQL 쿼리의 네 번째 '?'에 회원 연락처 설정
             ps.setString(4, memberDto.getMphone());
 
+            // SQL 쿼리 실행 후 삽입된 행의 수를 반환
             int count = ps.executeUpdate();
+            // 삽입된 행의 수가 1이면, 즉 성공적으로 삽입되었으면 true 반환
             return count == 1;
         } catch (Exception e) {
+            // 예외 발생 시 예외 메시지 출력
             System.out.println("회원가입 처리 실패: " + e);
-            return false;
         }
+        return false;
     }
 
     // 로그인 처리 메서드 : 로그인 성공한 회원번호 반환
@@ -144,35 +157,53 @@ public class MemberDao {
     // 로그인된 회원이름과 회원연락처를 수정 구현
     public boolean mUpdate(MemberDto memberDto) {
         try {
+            // SQL 쿼리 작성: 회원 이름과 연락처를 업데이트하는 쿼리
             String sql = "update member set mname = ?, mphone = ? where mno = ?;";
+            // PreparedStatement 객체 생성
             ps = conn.prepareStatement(sql);
+            // SQL 쿼리의 첫 번째 '?'에 회원 이름 설정
             ps.setString(1, memberDto.getMname());
+            // SQL 쿼리의 두 번째 '?'에 회원 연락처 설정
             ps.setString(2, memberDto.getMphone());
+            // SQL 쿼리의 세 번째 '?'에 회원 번호 설정
             ps.setInt(3, memberDto.getMno());
+
+            // SQL 쿼리 실행 후 업데이트된 행의 수를 반환
             int count = ps.executeUpdate();
+            // 업데이트된 행의 수가 1이면, 즉 성공적으로 업데이트되었으면 true 반환
             if (count == 1) {
                 return true;
             }
         } catch (Exception e) {
+            // 예외 발생 시 예외 메시지 출력
             System.out.println(e);
         }
+        // 업데이트 실패 시 false 반환
         return false;
     }
 
     // 3. 회원탈퇴 함수
     public boolean mDelete(String confirmPwd, int loginMno) {
         try {
+            // SQL 쿼리 작성: 회원 번호와 비밀번호를 조건으로 회원을 삭제하는 쿼리
             String sql = "delete from member where mno = ? and mpwd = ?";
+            // PreparedStatement 객체 생성
             ps = conn.prepareStatement(sql);
+            // SQL 쿼리의 첫 번째 '?'에 로그인된 회원 번호 설정
             ps.setInt(1, loginMno);
+            // SQL 쿼리의 두 번째 '?'에 확인용 비밀번호 설정
             ps.setString(2, confirmPwd);
+            // SQL 쿼리 실행 후 삭제된 행의 수를 반환
             int count = ps.executeUpdate();
+            // 삭제된 행의 수가 1이면, 즉 성공적으로 삭제되었으면 true 반환
             if (count == 1) {
                 return true;
             }
         } catch (Exception e) {
+            // 예외 발생 시 예외 메시지 출력
             System.out.println(e);
         }
+        // 삭제 실패 시 false 반환
         return false;
     }
 

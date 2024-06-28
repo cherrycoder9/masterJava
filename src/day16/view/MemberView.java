@@ -14,7 +14,7 @@ public class MemberView {
     // 사용자 입력을 위한 Scanner 객체
     Scanner scan = new Scanner(System.in);
 
-    // 초기 화면 표시 및 사용자 입력 처리 메서드
+    // 0. 초기 화면 표시 및 사용자 입력 처리 메서드
     public void index() {
         while (true) {
             System.out.print("1.회원가입 2.로그인 3.아이디찾기 4.비밀번호찾기: ");
@@ -38,7 +38,7 @@ public class MemberView {
         }
     }
 
-    // 회원가입 프로세스 처리 메서드
+    // 1. 회원가입 프로세스 처리 메서드
     public void signup() {
         System.out.print("아이디: ");
         String mid = scan.next();
