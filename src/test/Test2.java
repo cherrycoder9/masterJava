@@ -1,5 +1,7 @@
 package test;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+
 // 부모 클래스
 class Parent {
     public void parentMethod() {
@@ -22,7 +24,7 @@ class GrandChild extends Child {
 }
 
 public class Test2 {
-    public static void main(String[] args) {
+    public static void main(MysqlxDatatypes.Scalar.String[] args) {
         // 손자 객체 생성
         GrandChild grandChild = new GrandChild();
 
