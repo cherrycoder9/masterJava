@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class ConvenienceStore {
     // 멤버변수
-    private String name;
-    private ArrayList<Product> products;
+    private final String name;
+    private final ArrayList<Product> products;
 
     // 생성자
-    protected ConvenienceStore(String name) {
+    public ConvenienceStore(String name) {
         this.name = name;
         this.products = new ArrayList<>();
     }
