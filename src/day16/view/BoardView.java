@@ -124,11 +124,12 @@ public class BoardView {
         });
         System.out.println("0:글쓰기 1~:개별글조회");
 
+        // 사용자 입력을 받아 선택한 작업 수행
         int ch = scanner.nextInt();
         if (ch == 0) {
-            bWrite();
+            bWrite(); // 글쓰기 함수 호출
         } else if (ch >= 1) {
-            bView(ch);
+            bView(ch); // 개별 글 조회 함수 호출
         }
     }
 
@@ -136,11 +137,12 @@ public class BoardView {
     public void bWrite() {
         // 제목과 내용을 입력받는다
         System.out.println("제목을 입력하세요");
-        scanner.nextLine();
+        scanner.nextLine(); // 이전 입력 버퍼 비우기
         String title = scanner.nextLine();
         System.out.println("내용을 입력하세요");
         String content = scanner.nextLine();
 
+        // 컨트롤러에게 게시물 쓰기 요청
         boolean result = BoardController.getInstance().bWrite(title, content);
         if (result) {
             System.out.println("글등록 성공");
@@ -152,22 +154,56 @@ public class BoardView {
     // 6. 게시물 개별조회 함수
     public void bView(int bno) {
         System.out.println("게시물 번호를 입력하세요");
+        // 컨트롤러에게 개별 게시물 조회 요청
         BoardDto result = BoardController.getInstance().bView(bno);
         if (result == null) {
             System.out.println("존재하지 않는 게시물입니다.");
-            return;
+            return; // 함수 종료
         }
+
+        // 게시물 정보 출력
         System.out.println("제목: " + result.getBtitle());
         System.out.print("작성자: " + result.getMno());
         System.out.println("\t조회수: " + result.getBview());
         System.out.println("작성일: " + result.getBdate());
         System.out.println("내용: " + result.getBcontent());
+        System.out.println(">> 1.삭제 2.수정: ");
+        // 사용자 입력을 받아 선택한 작업 수행
+        int ch = scanner.nextInt();
+        if (ch == 1) {
+            bDelete(bno); // 게시물 삭제 함수 호출
+        } else if (ch == 2) {
+            bUpdate(bno); // 게시물 수정 함수 호출
+        }
     }
 
     // 7. 게시물 삭제 함수
-
+    // 삭제할 게시물의 작성자와 현재 로그인된 회원이 일치하면 삭제처리
+    public void bDelete(int bno) {
+        // 컨트롤러에게 게시물 삭제 요청
+        boolean result = BoardController.getInstance().bDelete(bno);
+        if (result) {
+            System.out.println(">> 삭제 성공");
+        } else {
+            System.out.println(">> 삭제 실패");
+        }
+    }
 
     // 8. 게시물 수정 함수
+    public void bUpdate(int bno) {
+        System.out.println("새로운 제목을 입력하세요");
+        scanner.nextLine(); // 이전 입력 버퍼 비우기
+        String title = scanner.nextLine();
+        System.out.println("새로운 내용을 입력하세요");
+        String content = scanner.nextLine();
 
+        // 컨트롤러에게 게시물 수정 요청
+        boolean result = BoardController.getInstance().bUpdate(bno, title, content);
+        if (result) {
+            System.out.println(">> 수정이 완료되었습니다");
+        } else {
+            System.out.println(">> 수정 실패");
+        }
 
+    }
 } // class end

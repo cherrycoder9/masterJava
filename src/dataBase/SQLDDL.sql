@@ -112,3 +112,7 @@ select * from board;
 
 # 2. 개별 조회 (조건이 들어감)
 select * from board where bno = 3;
+
+# 삭제
+delete from board where bno = 0; # 0번 게시물 삭제 
+delete from board where bno = 0 and mno = 0; # 작성자번호와 게시물번호가 0인 레코드 삭제
