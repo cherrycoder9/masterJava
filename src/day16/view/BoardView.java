@@ -123,7 +123,7 @@ public class BoardView {
             System.out.printf("%2d\t%2d\t\t%10s\t%s \n", boardDto.getBno(), boardDto.getBview(), boardDto.getBdate(), boardDto.getBtitle());
         });
         System.out.println("0:글쓰기 1~:개별글조회");
-        
+
         int ch = scanner.nextInt();
         if (ch == 0) {
             bWrite();
@@ -134,7 +134,19 @@ public class BoardView {
 
     // 5. 게시물 쓰기 함수
     public void bWrite() {
+        // 제목과 내용을 입력받는다
+        System.out.println("제목을 입력하세요");
+        scanner.nextLine();
+        String title = scanner.nextLine();
+        System.out.println("내용을 입력하세요");
+        String content = scanner.nextLine();
 
+        boolean result = BoardController.getInstance().bWrite(title, content);
+        if (result) {
+            System.out.println("글등록 성공");
+        } else {
+            System.out.println("글쓰기 실패");
+        }
     }
 
     // 6. 게시물 개별조회 함수

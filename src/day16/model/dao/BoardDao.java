@@ -68,7 +68,26 @@ public class BoardDao {
         return list; // 여러개 담긴 DTO 리스트 반환
     }
 
-    // 5. 게시물 개별 조회 함수
+    // 5. 게시물 쓰기 함수
+    public boolean bWrite(BoardDto boardDto) {
+        try {
+            String sql = "insert into board(btitle, bcontent, mno) values(?,?,?)";
+            ps = conn.prepareStatement(sql); // sql 기재
+            ps.setString(1, boardDto.getBtitle());
+            ps.setString(2, boardDto.getBcontent());
+            ps.setInt(3, boardDto.getMno());
+            if (ps.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    // 6. 게시물 개별 조회 함수
     public BoardDto bView(int bno) {
         BoardDto boardDto = new BoardDto();
         try {

@@ -27,7 +27,18 @@ public class BoardController {
         return BoardDao.getInstance().bPrint();
     }
 
-    // 5. 게시물 개별 조회 함수
+    // 5. 게시물 쓰기 함수
+    public boolean bWrite(String title, String content) {
+        int loginMno = MemberController.mControl.loginMno;
+        BoardDto boardDto = new BoardDto();
+        boardDto.setBtitle(title);
+        boardDto.setBcontent(content);
+        boardDto.setMno(loginMno);
+        // BoardDto를 다오에게 전달후 결과 받기
+        return BoardDao.getInstance().bWrite(boardDto);
+    }
+
+    // 6. 게시물 개별 조회 함수
     public BoardDto bView(int bno) {
         return BoardDao.getInstance().bView(bno);
     }
