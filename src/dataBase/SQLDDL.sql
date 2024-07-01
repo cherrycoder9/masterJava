@@ -105,3 +105,10 @@ SELECT * FROM member WHERE mid = 'hello1' AND mpwd = '1234';
 SELECT * FROM member;
 SELECT * FROM board;
 SELECT * FROM reply;
+
+# 조회
+# 1. 전체 조회 
+select * from board;
+
+# 2. 개별 조회 (조건이 들어감)
+select * from board where bno = 3;

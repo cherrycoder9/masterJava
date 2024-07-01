@@ -3,9 +3,12 @@ package day16.view;
 // MemberController와 MemberDto 클래스를 사용하기 위해 import
 // Scanner: 사용자 입력을 받기 위해 사용되는 클래스
 
+import day16.controller.BoardController;
 import day16.controller.MemberController;
+import day16.model.dto.BoardDto;
 import day16.model.dto.MemberDto;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BoardView {
@@ -112,14 +115,45 @@ public class BoardView {
 
     // 4. 게시판(게시물전체출력) 함수
     public void bprint() {
-
+        // 컨트롤에게 전체 게시물 조회 요청
+        ArrayList<BoardDto> result = BoardController.getInstance().bPrint();
+        System.out.println("번호\t조회수\t\t작성일\t\t\t제목");
+        // 리스트객체명.forEach(반복변수 -> {실행문;}); // 리스트내 전체 dto를 하나씩 반복변수에 대입 반복
+        result.forEach(boardDto -> {
+            System.out.printf("%2d\t%2d\t\t%10s\t%s \n", boardDto.getBno(), boardDto.getBview(), boardDto.getBdate(), boardDto.getBtitle());
+        });
+        System.out.println("0:글쓰기 1~:개별글조회");
+        
+        int ch = scanner.nextInt();
+        if (ch == 0) {
+            bWrite();
+        } else if (ch >= 1) {
+            bView(ch);
+        }
     }
 
     // 5. 게시물 쓰기 함수
+    public void bWrite() {
+
+    }
 
     // 6. 게시물 개별조회 함수
+    public void bView(int bno) {
+        System.out.println("게시물 번호를 입력하세요");
+        BoardDto result = BoardController.getInstance().bView(bno);
+        if (result == null) {
+            System.out.println("존재하지 않는 게시물입니다.");
+            return;
+        }
+        System.out.println("제목: " + result.getBtitle());
+        System.out.print("작성자: " + result.getMno());
+        System.out.println("\t조회수: " + result.getBview());
+        System.out.println("작성일: " + result.getBdate());
+        System.out.println("내용: " + result.getBcontent());
+    }
 
     // 7. 게시물 삭제 함수
+
 
     // 8. 게시물 수정 함수
 
