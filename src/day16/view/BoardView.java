@@ -114,4 +114,14 @@ public class BoardView {
     public void bprint() {
 
     }
+
+    // 5. 게시물 쓰기 함수
+
+    // 6. 게시물 개별조회 함수
+
+    // 7. 게시물 삭제 함수
+
+    // 8. 게시물 수정 함수
+
+
 } // class end

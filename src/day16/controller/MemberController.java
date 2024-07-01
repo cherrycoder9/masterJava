@@ -9,6 +9,7 @@ import day16.model.dto.MemberDto;
 public class MemberController {
 
     // 공유 MemberController 인스턴스
+    // 모든곳에서 공유 가능한 전역객체 1개 생성
     public static MemberController mControl = new MemberController();
     // 로그인한 회원의 회원 번호(mno)를 저장하는 데 사용
     public int loginMno = 0;

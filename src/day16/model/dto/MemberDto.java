@@ -2,7 +2,11 @@ package day16.model.dto;
 
 // 회원 정보 데이터 전송 객체(DTO)
 public class MemberDto {
-    // 회원 정보 필드
+    // DB 테이블의 회원마다 레코드/행 1개이고 레코드/행 1개당 DTO 1개
+    // 회원이 여러개이면 --> DTO 여러개 --> arrayList<MemberDto>
+    // 싱글톤: 프로그램 내 전역으로 객체가 1개 존재, 주로 전역에서 공유할때
+
+    // 회원 정보 필드 <--> DB 테이블 필드와 동일, private 권장
     private String mid;    // 회원 아이디
     private String mpwd;   // 회원 비밀번호
     private String mname;  // 회원 이름
