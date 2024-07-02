@@ -7,6 +7,7 @@ import day16.controller.BoardController;
 import day16.controller.MemberController;
 import day16.model.dto.BoardDto;
 import day16.model.dto.MemberDto;
+import day16.model.dto.ReplyDto;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -167,13 +168,18 @@ public class BoardView {
         System.out.println("\t조회수: " + result.getBview());
         System.out.println("작성일: " + result.getBdate());
         System.out.println("내용: " + result.getBcontent());
-        System.out.println(">> 1.삭제 2.수정: ");
+        // 댓글 출력
+        rPrint(bno);
+        // ----------------
         // 사용자 입력을 받아 선택한 작업 수행
+        System.out.println(">> 1.삭제 2.수정 3.댓글쓰기: ");
         int ch = scanner.nextInt();
         if (ch == 1) {
             bDelete(bno); // 게시물 삭제 함수 호출
         } else if (ch == 2) {
             bUpdate(bno); // 게시물 수정 함수 호출
+        } else if (ch == 3) {
+            bWrite(); // 게시물 수정 함수 호출
         }
     }
 
@@ -205,5 +211,15 @@ public class BoardView {
             System.out.println(">> 수정 실패");
         }
 
+    } // bUpdate 함수 종료
+
+    // 9. 댓글 출력 함수
+    public void rPrint(int bno) {
+        ArrayList<ReplyDto> result = BoardController.getInstance().rPrint(bno);
+        System.out.println(result);
+    }
+
+    // 10. 댓글 쓰기 함수
+    public void rWrite(int bno) {
     }
 } // class end

@@ -1,6 +1,7 @@
 package day16.model.dao;
 
 import day16.model.dto.BoardDto;
+import day16.model.dto.ReplyDto;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -117,11 +118,15 @@ public class BoardDao {
     // 게시물 삭제 함수
     public boolean bDelete(int bno, int mno) {
         try {
-            // SQL 쿼리 작성: 특정 게시물 번호와 작성자 회원 번호가 일치하는 게시물 삭제
             String sql = "delete from board where bno=? and mno=?";
             ps = conn.prepareStatement(sql); // SQL 쿼리 준비
-            ps.setInt(1, bno); // 첫 번째 ?에 게시물 번호 설정
+            ps.setInt(1, bno); //  첫 번째 ?에 게시물 번호 설정
             ps.setInt(2, mno); // 두 번째 ?에 작성자 회원 번호 설정
+
+            int count = ps.executeUpdate();
+            if (count == 1) {
+
+            }
 
             // 쿼리 실행 및 결과 확인
             if (ps.executeUpdate() == 1) {
@@ -153,4 +158,50 @@ public class BoardDao {
 
         return false; // 예외 발생 시 또는 수정 실패 시 false 반환
     } // bUpdate 종료
+
+    // 9. 댓글 출력 함수
+    // 주어진 게시물 번호에 해당하는 댓글들을 조회하여 리스트로 반환하는 함수
+    public ArrayList<ReplyDto> rPrint(int bno) {
+        try {
+            // SQL 쿼리를 준비
+            // 주어진 게시물 번호(bno)에 해당하는 모든 댓글을 선택하는 쿼리
+            String sql = "select * from reply where bno=?";
+            // PreparedStatement 객체를 사용하여 SQL 쿼리를 설정
+            // SQL 쿼리의 첫 번째 '?'에 주어진 게시물 번호를 설정
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, bno);
+
+            // SQL 쿼리를 실행하고 결과를 ResultSet 객체(rs)에 저장
+            rs = ps.executeQuery();
+
+            // 댓글들을 저장할 ArrayList 생성
+            ArrayList<ReplyDto> list = new ArrayList<>();
+            // ResultSet 객체에서 결과를 하나씩 처리
+            while (rs.next()) {
+                // 새로운 ReplyDto 객체 생성
+                ReplyDto replyDto = new ReplyDto();
+                // ResultSet에서 각 컬럼의 값을 가져와 ReplyDto 객체에 설정
+                replyDto.setBno(rs.getInt("bno"));
+                replyDto.setRcontent(rs.getString("rcontent"));
+                replyDto.setRdate(rs.getString("rdate"));
+                replyDto.setMno(rs.getInt("mno"));
+                replyDto.setRno(rs.getInt("rno"));
+                // 설정된 ReplyDto 객체를 리스트에 추가
+                list.add(replyDto);
+            }
+            // 댓글 리스트를 반환
+            return list;
+        } catch (Exception e) {
+            // 예외가 발생하면 에러 메시지를 출력
+            System.out.println(e);
+        }
+        // 예외가 발생하거나 결과가 없으면 null 반환
+        return null;
+    }
+
+    // 10. 댓글 쓰기 함수
+    public void rWrite() {
+
+    }
+
 } // BoardDao 클래스 종료

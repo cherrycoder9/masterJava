@@ -48,19 +48,19 @@ select * from board;
 
 # 3. 댓글 테이블 
 drop table if exists reply;
-create table reply(
-	rcontent varchar(200) not null,
-    rdate datetime default now(),
-    mno int,
-    bno int,
-    rno int auto_increment,
-    primary key(rno),
-    
-    # 회원이 탈퇴하면 댓글을 어떻게 할건지
-    foreign key(mno) references member(mno)
-    on delete cascade on update cascade,
-    foreign key(bno) references board(bno)
-    on delete cascade on update cascade
+CREATE TABLE reply (
+    rno INT AUTO_INCREMENT,                 -- 댓글 번호
+    rcontent VARCHAR(200) NOT NULL,         -- 댓글 내용
+    rdate DATETIME DEFAULT NOW(),           -- 댓글 작성 날짜
+    mno INT,                                -- 작성자 회원 번호
+    bno INT,                                -- 게시물 번호
+    PRIMARY KEY (rno),                      -- 기본 키 설정
+    FOREIGN KEY (mno) REFERENCES member(mno)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,                  -- 회원이 삭제되면 댓글도 삭제
+    FOREIGN KEY (bno) REFERENCES board(bno)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE                   -- 게시물이 삭제되면 댓글도 삭제
 );
 
 INSERT INTO reply (rcontent, mno, bno) VALUES ('댓글내용', 1, 2); # 1번 회원이 2번 게시물에 댓글 씀
