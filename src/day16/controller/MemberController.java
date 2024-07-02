@@ -30,6 +30,11 @@ public class MemberController {
         loginMno = 0;
     } // logout 함수 종료
 
+    // 2-3. 현재 로그인 상태 반환 함수
+    public boolean loginState() {
+        return loginMno == 0 ? false : true;
+    }
+
     // 2. 회원수정 함수
     // 로그인된 회원이름과 회원연락처를 수정 구현
     public boolean mUpdate(MemberDto memberDto) {

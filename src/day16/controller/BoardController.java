@@ -76,8 +76,13 @@ public class BoardController {
     }
 
     // 10. 댓글 쓰기 함수
-    public void rWrite(String rcontent, int bno) {
-
+    public boolean rWrite(String rcontent, int bno) {
+        int loginMno = MemberController.mControl.loginMno;
+        ReplyDto reply = new ReplyDto();
+        reply.setRcontent(rcontent);
+        reply.setBno(bno);
+        reply.setMno(loginMno);
+        return BoardDao.getInstance().rWrite(reply);
     }
 
 } // BoardController 클래스 종료

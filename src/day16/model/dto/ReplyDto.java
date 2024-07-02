@@ -7,14 +7,20 @@ public class ReplyDto {
     private String rdate;
     private int mno;
     private int bno;
+    private String mid;
 
     // 생성자
     public ReplyDto() {
     }
 
     // 풀 생성자
-    public ReplyDto(int rno, String rcontent, String rdate, int mno, int bno) {
-
+    public ReplyDto(int rno, String rcontent, String rdate, int mno, int bno, String mid) {
+        this.rno = rno;
+        this.rcontent = rcontent;
+        this.rdate = rdate;
+        this.mno = mno;
+        this.bno = bno;
+        this.mid = mid;
     }
 
     // 메서드
@@ -58,11 +64,20 @@ public class ReplyDto {
         this.bno = bno;
     }
 
+    public String getMid() {
+        return mid;
+    }
+
+    public void setMid(String mid) {
+        this.mid = mid;
+    }
+
     @Override
     public String toString() {
         return "ReplyDto{" +
                 "rno=" + rno +
                 ", rcontent='" + rcontent + '\'' +
+                ", mid='" + mid + '\'' +
                 ", rdate='" + rdate + '\'' +
                 ", mno=" + mno +
                 ", bno=" + bno +

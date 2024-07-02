@@ -8,6 +8,7 @@ public class BoardDto {
     private int bview; // 게시물 조회수
     private int mno; // 작성자 회원번호
     private int bno; // 게시물 번호
+    private String mid; // 작성자 아이디
 
     // 2. 기본 생성자
     public BoardDto() {
@@ -72,11 +73,20 @@ public class BoardDto {
         this.bno = bno;
     }
 
+    public String getMid() {
+        return mid;
+    }
+
+    public void setMid(String mid) {
+        this.mid = mid;
+    }
+
     @Override
     public String toString() {
         return "BoardDto{" +
                 "btitle='" + btitle + '\'' +
                 ", bcontent='" + bcontent + '\'' +
+                ", mid='" + mid + '\'' +
                 ", bdate='" + bdate + '\'' +
                 ", bview=" + bview +
                 ", mno=" + mno +

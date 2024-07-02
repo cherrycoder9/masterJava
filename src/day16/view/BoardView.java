@@ -118,10 +118,10 @@ public class BoardView {
     public void bprint() {
         // 컨트롤에게 전체 게시물 조회 요청
         ArrayList<BoardDto> result = BoardController.getInstance().bPrint();
-        System.out.println("번호\t조회수\t\t작성일\t\t\t제목");
+        System.out.println("번호\t조회수\t\t작성일\t\t작성자아이디\t제목");
         // 리스트객체명.forEach(반복변수 -> {실행문;}); // 리스트내 전체 dto를 하나씩 반복변수에 대입 반복
         result.forEach(boardDto -> {
-            System.out.printf("%2d\t%2d\t\t%10s\t%s \n", boardDto.getBno(), boardDto.getBview(), boardDto.getBdate(), boardDto.getBtitle());
+            System.out.printf("%2d\t%2d\t\t%10s\t%s\t%s \n", boardDto.getBno(), boardDto.getBview(), boardDto.getBdate(), boardDto.getMid(), boardDto.getBtitle());
         });
         System.out.println("0:글쓰기 1~:개별글조회");
 
@@ -172,14 +172,14 @@ public class BoardView {
         rPrint(bno);
         // ----------------
         // 사용자 입력을 받아 선택한 작업 수행
-        System.out.println(">> 1.삭제 2.수정 3.댓글쓰기: ");
+        System.out.println(">> 0.뒤로가기 1.삭제 2.수정 3.댓글쓰기: ");
         int ch = scanner.nextInt();
         if (ch == 1) {
             bDelete(bno); // 게시물 삭제 함수 호출
         } else if (ch == 2) {
             bUpdate(bno); // 게시물 수정 함수 호출
         } else if (ch == 3) {
-            bWrite(); // 게시물 수정 함수 호출
+            rWrite(bno); // 게시물 수정 함수 호출
         }
     }
 
@@ -216,10 +216,31 @@ public class BoardView {
     // 9. 댓글 출력 함수
     public void rPrint(int bno) {
         ArrayList<ReplyDto> result = BoardController.getInstance().rPrint(bno);
-        System.out.println(result);
+        result.forEach(reply -> {
+            System.out.printf(
+                    "%s %s %s\n",
+                    reply.getRdate(),
+                    reply.getMid(),
+                    reply.getRcontent());
+        });
     }
 
-    // 10. 댓글 쓰기 함수
+    // 10. 현재 로그인된 회원이 댓글 쓰기 함수
     public void rWrite(int bno) {
+        //
+        if (!MemberController.mControl.loginState()) {
+            System.out.println("로그인 후 가능함");
+            return;
+        }
+
+        System.out.print("댓글내용입력: ");
+        scanner.nextLine();
+        String rcontent = scanner.nextLine();
+        boolean result = BoardController.getInstance().rWrite(rcontent, bno);
+        if (result) {
+            System.out.println("댓글 등록 성공");
+        } else {
+            System.out.println("댓글 등록 실패");
+        }
     }
 } // class end

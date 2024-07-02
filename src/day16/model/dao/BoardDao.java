@@ -46,7 +46,7 @@ public class BoardDao {
         ArrayList<BoardDto> list = new ArrayList<>();
         try {
             // SQL 쿼리 작성
-            String sql = "select * from board";
+            String sql = "select * from board b inner join member m on b.mno = m.mno";
             // PreparedStatement 객체 생성
             ps = conn.prepareStatement(sql);
             // 쿼리 실행 및 결과 집합(ResultSet) 반환
@@ -60,6 +60,7 @@ public class BoardDao {
                 int bno = rs.getInt("bno");
                 // Dto 만들기
                 BoardDto boardDto = new BoardDto(btitle, bcontent, bdate, bview, mno, bno);
+                boardDto.setMid(rs.getString("mid"));
                 // 리스트에 DTO 담기
                 list.add(boardDto);
             }
@@ -94,12 +95,19 @@ public class BoardDao {
     public BoardDto bView(int bno) {
         BoardDto boardDto = new BoardDto(); // 조회된 게시물을 담을 BoardDto 객체 생성
         try {
+            // 조회수 1 증가 쿼리 작성
+            String updateSql = "update board set bview = bview + 1 where bno = ?";
+            ps = conn.prepareStatement(updateSql);
+            ps.setInt(1, bno);
+            ps.executeUpdate();
+
             // SQL 쿼리 작성: 특정 게시물 번호에 해당하는 게시물 조회
             String sql = "select * from board where bno=?";
             ps = conn.prepareStatement(sql); // SQL 쿼리 준비
             ps.setInt(1, bno); // 첫 번째 ?에 게시물 번호 설정
             rs = ps.executeQuery(); // 쿼리 실행 및 결과 집합(ResultSet) 반환
             if (rs.next()) {
+
                 // 현재 레코드의 각 필드 값을 BoardDto 객체에 설정
                 boardDto.setBno(rs.getInt("bno")); // 게시물 번호 설정
                 boardDto.setBtitle(rs.getString("btitle")); // 게시물 제목 설정
@@ -165,7 +173,7 @@ public class BoardDao {
         try {
             // SQL 쿼리를 준비
             // 주어진 게시물 번호(bno)에 해당하는 모든 댓글을 선택하는 쿼리
-            String sql = "select * from reply where bno=?";
+            String sql = "select * from reply r inner join member m on r.mno = m.mno where r.bno=?";
             // PreparedStatement 객체를 사용하여 SQL 쿼리를 설정
             // SQL 쿼리의 첫 번째 '?'에 주어진 게시물 번호를 설정
             ps = conn.prepareStatement(sql);
@@ -186,6 +194,7 @@ public class BoardDao {
                 replyDto.setRdate(rs.getString("rdate"));
                 replyDto.setMno(rs.getInt("mno"));
                 replyDto.setRno(rs.getInt("rno"));
+                replyDto.setMid(rs.getString("mid"));
                 // 설정된 ReplyDto 객체를 리스트에 추가
                 list.add(replyDto);
             }
@@ -200,8 +209,20 @@ public class BoardDao {
     }
 
     // 10. 댓글 쓰기 함수
-    public void rWrite() {
-
+    public boolean rWrite(ReplyDto replyDto) {
+        try {
+            String sql = "insert into reply(rcontent,mno,bno) values(?,?,?)";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, replyDto.getRcontent());
+            ps.setInt(2, replyDto.getMno());
+            ps.setInt(3, replyDto.getBno());
+            if (ps.executeUpdate() == 1) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
     }
 
 } // BoardDao 클래스 종료
