@@ -85,4 +85,10 @@ public class BoardController {
         return BoardDao.getInstance().rWrite(reply);
     }
 
+    // 12. 게시물 검색 함수
+    public ArrayList<BoardDto> search(String keyword) {
+        return BoardDao.getInstance().search(keyword);
+    }
+
+
 } // BoardController 클래스 종료

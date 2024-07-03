@@ -46,7 +46,7 @@ public class BoardDao {
         ArrayList<BoardDto> list = new ArrayList<>();
         try {
             // SQL 쿼리 작성
-            String sql = "select * from board b inner join member m on b.mno = m.mno";
+            String sql = "select * from board b inner join member m on b.mno = m.mno order by b.bno desc";
             // PreparedStatement 객체 생성
             ps = conn.prepareStatement(sql);
             // 쿼리 실행 및 결과 집합(ResultSet) 반환
@@ -224,5 +224,41 @@ public class BoardDao {
         }
         return false;
     }
+
+    // 12. 게시물 검색 함수
+    public ArrayList<BoardDto> search(String keyword) {
+        // 여러개 DTO 담을 리스트 선언
+        ArrayList<BoardDto> list = new ArrayList<>();
+        try {
+            // SQL 쿼리 작성
+            // String sql = "select * from board b inner join member m on b.mno = m.mno where btitle like ?";
+            String sql = "select * from board b inner join member m on b.mno = m.mno where btitle like CONCAT('%', ?, '%')";
+            // PreparedStatement 객체 생성
+            ps = conn.prepareStatement(sql);
+            System.out.println(ps);
+            // ps.setString(1, "%" + keyword + "%");
+            ps.setString(1, keyword);
+            // 쿼리 실행 및 결과 집합(ResultSet) 반환
+            rs = ps.executeQuery();
+            System.out.println(rs);
+            while (rs.next()) {
+                String btitle = rs.getString("btitle");
+                String bcontent = rs.getString("bcontent");
+                String bdate = rs.getString("bdate");
+                int bview = rs.getInt("bview");
+                int mno = rs.getInt("mno");
+                int bno = rs.getInt("bno");
+                // Dto 만들기
+                BoardDto boardDto = new BoardDto(btitle, bcontent, bdate, bview, mno, bno);
+                boardDto.setMid(rs.getString("mid"));
+                // 리스트에 Dto 담기
+                list.add(boardDto);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list; // 여러개 담긴 DTO 리스트 반환
+    } // search 함수 종료
+
 
 } // BoardDao 클래스 종료

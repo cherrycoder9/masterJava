@@ -123,7 +123,7 @@ public class BoardView {
         result.forEach(boardDto -> {
             System.out.printf("%2d\t%2d\t\t%10s\t%s\t%s \n", boardDto.getBno(), boardDto.getBview(), boardDto.getBdate(), boardDto.getMid(), boardDto.getBtitle());
         });
-        System.out.println("0:글쓰기 1~:개별글조회");
+        System.out.println("-1:키워드검색 0:글쓰기 1~:개별글조회");
 
         // 사용자 입력을 받아 선택한 작업 수행
         int ch = scanner.nextInt();
@@ -131,6 +131,8 @@ public class BoardView {
             bWrite(); // 글쓰기 함수 호출
         } else if (ch >= 1) {
             bView(ch); // 개별 글 조회 함수 호출
+        } else if (ch == -1) { // 검색키워드가 제목에 포함된 게시물 검색
+            search();
         }
     }
 
@@ -242,5 +244,17 @@ public class BoardView {
         } else {
             System.out.println("댓글 등록 실패");
         }
+    }
+
+    // 12. 제목 검색 함수
+    public void search() {
+        System.out.println("검색할 단어를 입력해주세요");
+        String keyword = scanner.next();
+        ArrayList<BoardDto> result = BoardController.getInstance().search(keyword);
+        System.out.println("번호\t조회수\t\t작성일\t\t작성자아이디\t제목");
+        // 리스트객체명.forEach(반복변수 -> {실행문;}); // 리스트내 전체 dto를 하나씩 반복변수에 대입 반복
+        result.forEach(boardDto -> {
+            System.out.printf("%2d\t%2d\t\t%10s\t%s\t%s \n", boardDto.getBno(), boardDto.getBview(), boardDto.getBdate(), boardDto.getMid(), boardDto.getBtitle());
+        });
     }
 } // class end
