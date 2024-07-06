@@ -3,9 +3,13 @@ package day16.view;
 // MemberController와 MemberDto 클래스를 사용하기 위해 import
 // Scanner: 사용자 입력을 받기 위해 사용되는 클래스
 
+import day16.controller.BoardController;
 import day16.controller.MemberController;
+import day16.model.dto.BoardDto;
 import day16.model.dto.MemberDto;
+import day16.model.dto.ReplyDto;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BoardView {
@@ -112,6 +116,145 @@ public class BoardView {
 
     // 4. 게시판(게시물전체출력) 함수
     public void bprint() {
+        // 컨트롤에게 전체 게시물 조회 요청
+        ArrayList<BoardDto> result = BoardController.getInstance().bPrint();
+        System.out.println("번호\t조회수\t\t작성일\t\t작성자아이디\t제목");
+        // 리스트객체명.forEach(반복변수 -> {실행문;}); // 리스트내 전체 dto를 하나씩 반복변수에 대입 반복
+        result.forEach(boardDto -> {
+            System.out.printf("%2d\t%2d\t\t%10s\t%s\t%s \n", boardDto.getBno(), boardDto.getBview(), boardDto.getBdate(), boardDto.getMid(), boardDto.getBtitle());
+        });
+        System.out.println("-1:키워드검색 0:글쓰기 1~:개별글조회");
 
+        // 사용자 입력을 받아 선택한 작업 수행
+        int ch = scanner.nextInt();
+        if (ch == 0) {
+            bWrite(); // 글쓰기 함수 호출
+        } else if (ch >= 1) {
+            bView(ch); // 개별 글 조회 함수 호출
+        } else if (ch == -1) { // 검색키워드가 제목에 포함된 게시물 검색
+            search();
+        }
+    }
+
+    // 5. 게시물 쓰기 함수
+    public void bWrite() {
+        // 제목과 내용을 입력받는다
+        System.out.println("제목을 입력하세요");
+        scanner.nextLine(); // 이전 입력 버퍼 비우기
+        String title = scanner.nextLine();
+        System.out.println("내용을 입력하세요");
+        String content = scanner.nextLine();
+
+        // 컨트롤러에게 게시물 쓰기 요청
+        boolean result = BoardController.getInstance().bWrite(title, content);
+        if (result) {
+            System.out.println("글등록 성공");
+        } else {
+            System.out.println("글쓰기 실패");
+        }
+    }
+
+    // 6. 게시물 개별조회 함수
+    public void bView(int bno) {
+        System.out.println("게시물 번호를 입력하세요");
+        // 컨트롤러에게 개별 게시물 조회 요청
+        BoardDto result = BoardController.getInstance().bView(bno);
+        if (result == null) {
+            System.out.println("존재하지 않는 게시물입니다.");
+            return; // 함수 종료
+        }
+
+        // 게시물 정보 출력
+        System.out.println("제목: " + result.getBtitle());
+        System.out.print("작성자: " + result.getMno());
+        System.out.println("\t조회수: " + result.getBview());
+        System.out.println("작성일: " + result.getBdate());
+        System.out.println("내용: " + result.getBcontent());
+        // 댓글 출력
+        rPrint(bno);
+        // ----------------
+        // 사용자 입력을 받아 선택한 작업 수행
+        System.out.println(">> 0.뒤로가기 1.삭제 2.수정 3.댓글쓰기: ");
+        int ch = scanner.nextInt();
+        if (ch == 1) {
+            bDelete(bno); // 게시물 삭제 함수 호출
+        } else if (ch == 2) {
+            bUpdate(bno); // 게시물 수정 함수 호출
+        } else if (ch == 3) {
+            rWrite(bno); // 게시물 수정 함수 호출
+        }
+    }
+
+    // 7. 게시물 삭제 함수
+    // 삭제할 게시물의 작성자와 현재 로그인된 회원이 일치하면 삭제처리
+    public void bDelete(int bno) {
+        // 컨트롤러에게 게시물 삭제 요청
+        boolean result = BoardController.getInstance().bDelete(bno);
+        if (result) {
+            System.out.println(">> 삭제 성공");
+        } else {
+            System.out.println(">> 삭제 실패");
+        }
+    }
+
+    // 8. 게시물 수정 함수
+    public void bUpdate(int bno) {
+        System.out.println("새로운 제목을 입력하세요");
+        scanner.nextLine(); // 이전 입력 버퍼 비우기
+        String title = scanner.nextLine();
+        System.out.println("새로운 내용을 입력하세요");
+        String content = scanner.nextLine();
+
+        // 컨트롤러에게 게시물 수정 요청
+        boolean result = BoardController.getInstance().bUpdate(bno, title, content);
+        if (result) {
+            System.out.println(">> 수정이 완료되었습니다");
+        } else {
+            System.out.println(">> 수정 실패");
+        }
+
+    } // bUpdate 함수 종료
+
+    // 9. 댓글 출력 함수
+    public void rPrint(int bno) {
+        ArrayList<ReplyDto> result = BoardController.getInstance().rPrint(bno);
+        result.forEach(reply -> {
+            System.out.printf(
+                    "%s %s %s\n",
+                    reply.getRdate(),
+                    reply.getMid(),
+                    reply.getRcontent());
+        });
+    }
+
+    // 10. 현재 로그인된 회원이 댓글 쓰기 함수
+    public void rWrite(int bno) {
+        //
+        if (!MemberController.mControl.loginState()) {
+            System.out.println("로그인 후 가능함");
+            return;
+        }
+
+        System.out.print("댓글내용입력: ");
+        scanner.nextLine();
+        String rcontent = scanner.nextLine();
+        boolean result = BoardController.getInstance().rWrite(rcontent, bno);
+        if (result) {
+            System.out.println("댓글 등록 성공");
+        } else {
+            System.out.println("댓글 등록 실패");
+        }
+    }
+
+    // 12. 제목 검색 함수
+    public void search() {
+        System.out.println("검색할 단어를 입력해주세요");
+        String keyword = scanner.next();
+        ArrayList<BoardDto> result = BoardController.getInstance().search(keyword);
+        System.out.println("번호\t조회수\t\t작성일\t\t작성자아이디\t제목");
+        // 리스트객체명.forEach(반복변수 -> {실행문;}); // 리스트내 전체 dto를 하나씩 반복변수에 대입 반복
+        result.forEach(boardDto -> {
+            System.out.printf("%2d\t%2d\t\t%10s\t%s\t%s \n", boardDto.getBno(), boardDto.getBview(), boardDto.getBdate(), boardDto.getMid(), boardDto.getBtitle());
+        });
     }
 } // class end

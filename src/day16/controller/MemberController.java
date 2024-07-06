@@ -9,6 +9,7 @@ import day16.model.dto.MemberDto;
 public class MemberController {
 
     // 공유 MemberController 인스턴스
+    // 모든곳에서 공유 가능한 전역객체 1개 생성
     public static MemberController mControl = new MemberController();
     // 로그인한 회원의 회원 번호(mno)를 저장하는 데 사용
     public int loginMno = 0;
@@ -28,6 +29,11 @@ public class MemberController {
     public void logout() {
         loginMno = 0;
     } // logout 함수 종료
+
+    // 2-3. 현재 로그인 상태 반환 함수
+    public boolean loginState() {
+        return loginMno == 0 ? false : true;
+    }
 
     // 2. 회원수정 함수
     // 로그인된 회원이름과 회원연락처를 수정 구현

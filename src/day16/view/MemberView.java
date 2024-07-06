@@ -13,6 +13,11 @@ import java.util.Scanner;
 // 회원 관련 사용자 인터페이스 클래스
 public class MemberView {
     // 다른 클래스에서 호출 가능한 정적 MemberView 객체
+    // 메소드를 실행하기 위해서는 객체 필요, static 메소드가 아닌 이상
+    // 스태틱 선언시점: 프로그램 시작시, 스태틱 사라지는 시점: 프로그램 종료시
+    // 객체 1개, n개여도 됨
+    // 멤버변수는 객체 마다 할당, 메소드는 객체마다 실행되지만 코드는 공유됨
+    // 모든곳에서 공유가능한 객체 1개 생성
     public static MemberView mView = new MemberView();
 
     // 사용자 입력을 위한 Scanner 객체
